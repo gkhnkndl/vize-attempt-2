@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:vizeapp/components/bottom_nav_bar.dart';
-import 'package:vizeapp/pages/adress_page.dart';
-import 'package:vizeapp/pages/cart_page.dart';
-import 'package:vizeapp/pages/credit_page.dart';
-import 'package:vizeapp/pages/gemini_chat.dart';
-import 'package:vizeapp/pages/shop_page.dart';
-import 'package:vizeapp/pages/todopage.dart';
+import 'package:vizeapp/screens/adress_page.dart';
+import 'package:vizeapp/screens/cart_page.dart';
+import 'package:vizeapp/screens/credit_page.dart';
+import 'package:vizeapp/screens/gemini_chat.dart';
+import 'package:vizeapp/screens/shop_page.dart';
+import 'package:vizeapp/screens/todopage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -63,31 +64,38 @@ class _HomePageState extends State<HomePage> {
                 //logo
                 DrawerHeader(child: Image.asset('assets/images/logo.png')),
                 // other pages
-                const Padding(
-                  padding: const EdgeInsets.only(left: 25),
-                  child: ListTile(
-                    leading: Icon(Icons.home),
-                    title: Text("Home"),
-                  ),
-                ),
-                const Padding(
-                  padding: const EdgeInsets.only(left: 25),
-                  child: ListTile(
-                    leading: Icon(Icons.location_city),
-                    title: Text("My Address"),
-                  ),
-                ),
-                const Padding(
-                  padding: const EdgeInsets.only(left: 25),
-                  child: ListTile(
-                    leading: Icon(Icons.credit_card),
-                    title: Text("Saved Credit Cards"),
+                InkWell(
+                  onTap: () => GoRouter.of(context).push("/home"),
+                  child: const Padding(
+                    padding: const EdgeInsets.only(left: 25),
+                    child: ListTile(
+                      leading: Icon(Icons.home),
+                      title: Text("Home"),
+                    ),
                   ),
                 ),
                 InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, "/todo");
-                  },
+                  onTap: () => GoRouter.of(context).push("/address"),
+                  child: const Padding(
+                    padding: const EdgeInsets.only(left: 25),
+                    child: ListTile(
+                      leading: Icon(Icons.location_city),
+                      title: Text("My Address"),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () => GoRouter.of(context).push("/credit"),
+                  child: const Padding(
+                    padding: const EdgeInsets.only(left: 25),
+                    child: ListTile(
+                      leading: Icon(Icons.credit_card),
+                      title: Text("Saved Credit Cards"),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () => GoRouter.of(context).push("/todo"),
                   child: Container(
                     child: const Padding(
                       padding: const EdgeInsets.only(left: 25),
@@ -99,9 +107,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, "/settings");
-                  },
+                  onTap: () => GoRouter.of(context).push("/settings"),
                   child: Container(
                     child: const Padding(
                       padding: const EdgeInsets.only(left: 25),
@@ -113,21 +119,27 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
 
-                const Padding(
-                  padding: const EdgeInsets.only(left: 25),
-                  child: ListTile(
-                    leading: Icon(Icons.info),
-                    title: Text("About"),
+                InkWell(
+                  onTap: () => GoRouter.of(context).push("/about"),
+                  child: const Padding(
+                    padding: const EdgeInsets.only(left: 25),
+                    child: ListTile(
+                      leading: Icon(Icons.info),
+                      title: Text("About"),
+                    ),
                   ),
                 ),
               ],
             ),
             // LOGOUT
-            const Padding(
-              padding: const EdgeInsets.only(left: 25, bottom: 25),
-              child: ListTile(
-                leading: Icon(Icons.logout),
-                title: Text("Logout"),
+            InkWell(
+              onTap: () => GoRouter.of(context).push("/logout"),
+              child: const Padding(
+                padding: const EdgeInsets.only(left: 25, bottom: 25),
+                child: ListTile(
+                  leading: Icon(Icons.logout),
+                  title: Text("Logout"),
+                ),
               ),
             ),
           ],

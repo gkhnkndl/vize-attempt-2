@@ -10,8 +10,15 @@ class AboutPage extends StatefulWidget {
 class _ShopPageState extends State<AboutPage> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text("about"),
+    return Scaffold(     
+      appBar: AppBar(
+        title: Text("About"),
+        centerTitle: true,
+        backgroundColor: Theme.of(context).colorScheme.background,
+      ), 
+      body: Center(
+        child: Text("ABOUT"),
+      ),
     );
   }
 }

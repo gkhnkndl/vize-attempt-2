@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:vizeapp/pages/home_page.dart';
-import 'package:vizeapp/pages/shop_page.dart';
+import 'package:vizeapp/screens/home_page.dart';
+import 'package:vizeapp/screens/shop_page.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});

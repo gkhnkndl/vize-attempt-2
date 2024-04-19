@@ -10,8 +10,15 @@ class CreditPage extends StatefulWidget {
 class _ShopPageState extends State<CreditPage> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text("credit"),
+    return Scaffold(     
+      appBar: AppBar(
+        title: Text("Credit Carts"),
+        centerTitle: true,
+        backgroundColor: Theme.of(context).colorScheme.background,
+      ), 
+      body: Center(
+        child: Text("CREDIT CARTS"),
+      ),
     );
   }
 }
