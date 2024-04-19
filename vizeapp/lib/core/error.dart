@@ -14,20 +14,22 @@ class _ErrorScreenState extends State<ErrorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              "404",
-              style: TextStyle(fontSize: 45, color: Colors.red),
-            ),
-            const Gap(20),
-            IconButton(
-              onPressed: () => GoRouter.of(context).pop(),
-              icon: const Icon(CupertinoIcons.chevron_back),
-            ),
-          ],
+      body: Center(
+        child: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "404 - not found",
+                style: TextStyle(fontSize: 45, color: Colors.red),
+              ),
+              const Gap(20),
+              IconButton(
+                onPressed: () => GoRouter.of(context).pop(),
+                icon: const Icon(CupertinoIcons.chevron_back),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,13 +1,14 @@
 import 'package:go_router/go_router.dart';
 
-import '../screens/about_page.dart';
+import '../static/about_page.dart';
 import '../screens/adress_page.dart';
 import '../screens/credit_page.dart';
 import '../screens/home_page.dart';
-import '../screens/intro_page.dart';
+import '../static/boarding_page.dart';
 import '../screens/settings_page.dart';
 import '../screens/todopage.dart';
 import '../core/error.dart';
+import '../core/loader.dart';
 
 
 
@@ -17,7 +18,11 @@ final routes = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const IntroPage(),
+      builder: (context, state) => const LoaderScreen(),
+    ),
+    GoRoute(
+      path: '/boarding',
+      builder: (context, state) => const BoardingPage(),
     ),
     GoRoute(
       path: "/home",
@@ -41,7 +46,7 @@ final routes = GoRouter(
     ),  
     GoRoute(
       path: "/logout",
-      builder: (context, state) => const IntroPage(),
+      builder: (context, state) => const BoardingPage(),
     ),  
     GoRoute(
       path: "/about",

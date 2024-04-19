@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:vizeapp/models/cart.dart';
 import 'package:vizeapp/screens/gemini_chat.dart';
 import 'package:vizeapp/screens/home_page.dart';
-import 'package:vizeapp/screens/intro_page.dart';
+import 'package:vizeapp/static/boarding_page.dart';
 import 'package:vizeapp/screens/settings_page.dart';
 import 'package:vizeapp/screens/todopage.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';

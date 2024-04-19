@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:vizeapp/data/database.dart';
+import 'package:vizeapp/core/storage.dart';
 import '../components/dialog_box.dart';
 import '../components/todo_tile.dart';
 
