@@ -15,7 +15,7 @@ class ShoeTile extends StatelessWidget {
       margin: EdgeInsets.only(left: 20),
       width: 280,
       decoration: BoxDecoration(
-          color: Colors.grey[100], borderRadius: BorderRadius.circular(12)),
+          color: Theme.of(context).colorScheme.primary, borderRadius: BorderRadius.circular(12)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -42,7 +42,7 @@ class ShoeTile extends StatelessWidget {
                     Text(
                       shoe.name,
                       style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16),
+                          fontWeight: FontWeight.bold, fontSize: 16,),
                     ),
                     // price
                     const SizedBox(height: 5),

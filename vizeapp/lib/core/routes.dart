@@ -1,7 +1,12 @@
 import 'package:go_router/go_router.dart';
-import 'package:vizeapp/pages/gemini_chat.dart';
-import 'package:vizeapp/pages/home_page.dart';
-import 'package:vizeapp/pages/intro_page.dart';
+
+import '../pages/about_page.dart';
+import '../pages/adress_page.dart';
+import '../pages/credit_page.dart';
+import '../pages/intro_page.dart';
+import '../pages/settings_page.dart';
+import '../pages/todopage.dart';
+
 
 
 // GoRouter configuration
@@ -13,13 +18,28 @@ final routes = GoRouter(
       builder: (context, state) => const IntroPage(),
     ),
     GoRoute(
-      path: "/cart",
-      builder: (context, state) => const HomePage(),
-    ),
+      path: "/settings",
+      builder: (context, state) => const SettingsPage(),
+    ),  
     GoRoute(
-      path: "/chat",
-      builder: (context, state) => const ChatPage(),
-    ),
+      path: "/todo",
+      builder: (context, state) => const ToDoPage(),
+    ),  
+    GoRoute(
+      path: "/credit",
+      builder: (context, state) => const CreditPage(),
+    ),  
+    GoRoute(
+      path: "/address",
+      builder: (context, state) => const AddressPage(),
+    ),  
+    GoRoute(
+      path: "/logout",
+      builder: (context, state) => const IntroPage(),
+    ),  
+    GoRoute(
+      path: "/about",
+      builder: (context, state) => const AboutPage(),
+    ),    
   ],
 );
-//onTap: () => context.push("/brands"),

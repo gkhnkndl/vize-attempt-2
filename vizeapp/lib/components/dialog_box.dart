@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vizeapp/utility/my_button.dart';
+import 'package:vizeapp/components/my_button.dart';
 
 class DialogBox extends StatelessWidget {
   final controller;

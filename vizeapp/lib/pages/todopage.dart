@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:vizeapp/data/database.dart';
-import '../utility/dialog_box.dart';
-import '../utility/todo_tile.dart';
+import '../components/dialog_box.dart';
+import '../components/todo_tile.dart';
 
 class ToDoPage extends StatefulWidget {
   const ToDoPage({super.key});
@@ -75,7 +75,7 @@ final _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(179, 221, 221, 221),
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: Text("To Do"),
         centerTitle: true,
@@ -83,7 +83,7 @@ final _controller = TextEditingController();
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: createNewTask,
-        child: Icon(Icons.add),
+        child: Icon(Icons.add, color:Theme.of(context).colorScheme.secondary,),
       ),
       body: ListView.builder(
         itemCount: db.toDoList.length,

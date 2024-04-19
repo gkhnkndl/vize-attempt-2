@@ -5,10 +5,14 @@ import 'package:vizeapp/models/cart.dart';
 import 'package:vizeapp/pages/gemini_chat.dart';
 import 'package:vizeapp/pages/home_page.dart';
 import 'package:vizeapp/pages/intro_page.dart';
+import 'package:vizeapp/pages/settings_page.dart';
 import 'package:vizeapp/pages/todopage.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:vizeapp/theme/theme.dart';
-import 'package:vizeapp/utility/todo_tile.dart';
+import 'package:vizeapp/theme/theme_provider.dart';
+import 'package:vizeapp/components/todo_tile.dart';
+
+import '../core/routes.dart';
 
 void main() async {
 
@@ -18,7 +22,8 @@ void main() async {
   //open a box
   var box = await Hive.openBox('mybox');
 
-  runApp( MyApp());
+  runApp( ChangeNotifierProvider(create: (context) => ThemeProvider(),
+  child: MyApp(),));
 }
 
 class MyApp extends StatelessWidget {
@@ -28,18 +33,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(create: (context) => Cart(),
-    builder: (context, child) => MaterialApp(
-      routes: {
-        "/home": (context) => HomePage(),        
-        "/todo": (context) => ToDoPage(),
-        "/intro": (context) => IntroPage(),
-      },
-       title: "SneakerPlace",
-      initialRoute: "/intro",
-      debugShowCheckedModeBanner: false,
-      home: IntroPage(),
-      theme: lightMode,
-      darkTheme: darkMode,
+    builder: (context, child) => MaterialApp.router(
+      routerConfig: routes,
+       title: "SneakerPlace",      
+      debugShowCheckedModeBanner: false,      
+      theme: Provider.of<ThemeProvider>(context).themeData,
     ));
   }
 }

@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
                   child: IconButton(
                     icon: Icon(
                       Icons.menu,
-                      color: Theme.of(context).colorScheme.primary, //THEME
+                      color: Theme.of(context).colorScheme.secondary, //THEME
                     ),
                     onPressed: () {
                       Scaffold.of(context).openDrawer();
@@ -86,8 +86,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 InkWell(
                   onTap: () {
-                  Navigator.pushNamed(context, "/todo");
-                },
+                    Navigator.pushNamed(context, "/todo");
+                  },
                   child: Container(
                     child: const Padding(
                       padding: const EdgeInsets.only(left: 25),
@@ -98,13 +98,21 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: const EdgeInsets.only(left: 25),
-                  child: ListTile(
-                    leading: Icon(Icons.settings),
-                    title: Text("Settings"),
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, "/settings");
+                  },
+                  child: Container(
+                    child: const Padding(
+                      padding: const EdgeInsets.only(left: 25),
+                      child: ListTile(
+                        leading: Icon(Icons.settings),
+                        title: Text("Settings"),
+                      ),
+                    ),
                   ),
                 ),
+
                 const Padding(
                   padding: const EdgeInsets.only(left: 25),
                   child: ListTile(
