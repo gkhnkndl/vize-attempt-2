@@ -64,9 +64,9 @@ class Storage {
   Future<List<PaymentCard>> loadCards() async {
     const storage = FlutterSecureStorage();
 
-    final cards = await storage.read(key: "cards");
+    final cards = await storage.read(key: "paymentCards");
     if (cards != null) {
-      final temp = jsonDecode(cards) as List<String>;
+      final temp = jsonDecode(cards);
       List<PaymentCard> cardList = [];
       for (var i = 0; i < temp.length; i++) {
         cardList.add(PaymentCard.fromJson(jsonDecode(temp[i])));
@@ -83,9 +83,9 @@ class Storage {
     List<String> cardsString = [];
 
     for (var i = 0; i < cards.length; i++) {
-      cardsString.add(cards[i].toJson().toString());
+      cardsString.add(jsonEncode(cards[i].toJson()));
     }
 
-    await storage.write(key: "cards", value: jsonEncode(cardsString));
+    await storage.write(key: "paymentCards", value: jsonEncode(cardsString));
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,7 @@ class _ShopPageState extends State<ShopPage> {
    //alert the user when successfully add 
    showDialog(context: context, builder: (context) => AlertDialog(
     title: Text("Successfully added."),
-    content: Text("Chech your cart."),
+    content: Text("Check your cart."),
    ),);
   }
 

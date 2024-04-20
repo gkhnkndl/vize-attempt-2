@@ -25,7 +25,7 @@ class Cart extends ChangeNotifier{
     Shoe(
       name: "Walker",
       price: "120",
-      imagePath: "assets/images/walker2.png",
+      imagePath: "assets/images/jordan.png",
       descripton: "Walk as much as you want",
     ),
   ];

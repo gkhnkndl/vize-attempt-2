@@ -13,7 +13,15 @@ class PaymentPage extends StatefulWidget {
 }
 
 class _ShopPageState extends State<PaymentPage> {
+  MaterialStateProperty<Color?> overlayColor =
+      MaterialStateColor.resolveWith((states) => Colors.transparent);
   List<PaymentCard> cards = [];
+  TextEditingController cardNoCnt = TextEditingController();
+  TextEditingController cardHolderCnt = TextEditingController();
+  TextEditingController cvv2Cnt = TextEditingController();
+  TextEditingController expYearCnt = TextEditingController();
+  TextEditingController expMonthCnt = TextEditingController();
+  TextEditingController titleCnt = TextEditingController();
 
   bool remember = false;
   loadCards() async {
@@ -24,7 +32,30 @@ class _ShopPageState extends State<PaymentPage> {
     });
   }
 
-  saveCard() async {}
+  saveCard() async {
+    //
+    final PaymentCard newCard = PaymentCard(
+        cardHolder: cardHolderCnt.text,
+        cardNo: cardNoCnt.text,
+        cvv: cvv2Cnt.text,
+        expMonth: expMonthCnt.text,
+        expYear: expYearCnt.text,
+        title: titleCnt.text);
+
+    List<PaymentCard> newCardList = [];
+    newCardList.addAll(cards);
+
+    newCardList.add(newCard);
+
+    if (remember) {
+      final storage = Storage();
+
+      await storage.saveCards(newCardList);
+    }
+    setState(() {
+      cards = newCardList;
+    });
+  }
 
   @override
   void initState() {
@@ -36,16 +67,6 @@ class _ShopPageState extends State<PaymentPage> {
     showDialog(
         context: context,
         builder: (context) {
-          MaterialStateProperty<Color?> overlayColor =
-              MaterialStateColor.resolveWith((states) => Colors.transparent);
-
-          TextEditingController cardNoCnt = TextEditingController();
-          TextEditingController cardHolderCnt = TextEditingController();
-          TextEditingController cvv2Cnt = TextEditingController();
-          TextEditingController expYearCnt = TextEditingController();
-          TextEditingController expMonthCnt = TextEditingController();
-          TextEditingController titleCnt = TextEditingController();
-
           return StatefulBuilder(builder: (context, setState) {
             return AlertDialog(
               backgroundColor: Theme.of(context).colorScheme.background,
@@ -61,7 +82,12 @@ class _ShopPageState extends State<PaymentPage> {
                     decoration: InputDecoration(
                         hoverColor: Colors.cyan.shade300,
                         focusColor: Theme.of(context).colorScheme.background,
-                        hintText: "Card Title",
+                        labelStyle: TextStyle(color: Colors.cyan),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                          color: Colors.cyan,
+                        )),
+                        labelText: "Card Title",
                         border: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.cyan.shade300))),
@@ -74,7 +100,12 @@ class _ShopPageState extends State<PaymentPage> {
                     decoration: InputDecoration(
                         hoverColor: Colors.cyan.shade300,
                         focusColor: Theme.of(context).colorScheme.background,
-                        hintText: "Card Holder",
+                        labelStyle: TextStyle(color: Colors.cyan),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                          color: Colors.cyan,
+                        )),
+                        labelText: "Card Holder",
                         border: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.cyan.shade300))),
@@ -92,7 +123,12 @@ class _ShopPageState extends State<PaymentPage> {
                     decoration: InputDecoration(
                         hoverColor: Colors.cyan.shade300,
                         focusColor: Theme.of(context).colorScheme.background,
-                        hintText: "Card No",
+                        labelStyle: TextStyle(color: Colors.cyan),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                          color: Colors.cyan,
+                        )),
+                        labelText: "Card No",
                         border: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.cyan.shade300))),
@@ -115,8 +151,12 @@ class _ShopPageState extends State<PaymentPage> {
                               hoverColor: Colors.cyan.shade300,
                               focusColor:
                                   Theme.of(context).colorScheme.background,
-                              
-                              hintText: "CVV2",
+                              labelStyle: TextStyle(color: Colors.cyan),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: Colors.cyan,
+                              )),
+                              labelText: "CVV2",
                               border: OutlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Colors.cyan.shade300))),
@@ -137,7 +177,13 @@ class _ShopPageState extends State<PaymentPage> {
                               hoverColor: Colors.cyan.shade300,
                               focusColor:
                                   Theme.of(context).colorScheme.background,
-                              hintText: "Ending Month",
+                              hintText: "Month",
+                              labelText: "End",
+                              labelStyle: TextStyle(color: Colors.cyan),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: Colors.cyan,
+                              )),
                               border: OutlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Colors.cyan.shade300))),
@@ -155,10 +201,16 @@ class _ShopPageState extends State<PaymentPage> {
                           cursorColor: Theme.of(context).colorScheme.secondary,
                           maxLength: 2,
                           decoration: InputDecoration(
+                              labelStyle: TextStyle(color: Colors.cyan),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                color: Colors.cyan,
+                              )),
                               hoverColor: Colors.cyan.shade300,
                               focusColor:
                                   Theme.of(context).colorScheme.background,
-                              hintText: "Ending Year",
+                              hintText: "Year",
+                              labelText: "End",
                               border: OutlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Colors.cyan.shade300))),
@@ -218,11 +270,12 @@ class _ShopPageState extends State<PaymentPage> {
         child: SizedBox.expand(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: ListView(
-              children: [
-                if (cards.isEmpty) const Text("No Card Found"),
-              ],
-            ),
+            child: cards.isEmpty
+                ? const Center(child: Text("No Card Found"))
+                : ListView.builder(
+                    itemCount: cards.length,
+                    itemBuilder: (context, index) => Text("card"),
+                  ),
           ),
         ),
       ),
