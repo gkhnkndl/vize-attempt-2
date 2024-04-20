@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import '../models/credit_card.dart';
 
 // Yapılacaklar listesi database i deneme amaçlı hive ile yapıldı.
 class ToDoDataBase {
@@ -36,12 +41,11 @@ class Storage {
 
     var counter = storage.getInt("launchCount");
 
-
     if (runned == null) {
       counter = 1;
       await storage.setInt("launchCount", 1);
       return true;
-    } else {      
+    } else {
       await storage.setInt("launchCount", counter! + 1);
       return false;
     }
@@ -57,6 +61,31 @@ class Storage {
     await storage.clear();
   }
 
+  Future<List<PaymentCard>> loadCards() async {
+    const storage = FlutterSecureStorage();
 
-  
+    final cards = await storage.read(key: "cards");
+    if (cards != null) {
+      final temp = jsonDecode(cards) as List<String>;
+      List<PaymentCard> cardList = [];
+      for (var i = 0; i < temp.length; i++) {
+        cardList.add(PaymentCard.fromJson(jsonDecode(temp[i])));
+      }
+      return cardList;
+    } else {
+      return [];
+    }
+  }
+
+  saveCards(List<PaymentCard> cards) async {
+    const storage = FlutterSecureStorage();
+
+    List<String> cardsString = [];
+
+    for (var i = 0; i < cards.length; i++) {
+      cardsString.add(cards[i].toJson().toString());
+    }
+
+    await storage.write(key: "cards", value: jsonEncode(cardsString));
+  }
 }

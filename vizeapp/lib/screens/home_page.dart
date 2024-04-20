@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:vizeapp/components/bottom_nav_bar.dart';
 import 'package:vizeapp/screens/adress_page.dart';
 import 'package:vizeapp/screens/cart_page.dart';
-import 'package:vizeapp/screens/credit_page.dart';
+import 'package:vizeapp/screens/payment_page.dart';
 import 'package:vizeapp/screens/gemini_chat.dart';
 import 'package:vizeapp/screens/shop_page.dart';
 import 'package:vizeapp/screens/todopage.dart';

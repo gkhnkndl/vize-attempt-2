@@ -2,7 +2,7 @@ import 'package:go_router/go_router.dart';
 
 import '../static/about_page.dart';
 import '../screens/adress_page.dart';
-import '../screens/credit_page.dart';
+import '../screens/payment_page.dart';
 import '../screens/home_page.dart';
 import '../static/boarding_page.dart';
 import '../screens/settings_page.dart';
@@ -38,7 +38,7 @@ final routes = GoRouter(
     ),  
     GoRoute(
       path: "/credit",
-      builder: (context, state) => const CreditPage(),
+      builder: (context, state) => const PaymentPage(),
     ),  
     GoRoute(
       path: "/address",
