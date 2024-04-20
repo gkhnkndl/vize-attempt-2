@@ -31,7 +31,7 @@ class BoardingItem extends StatelessWidget {
                   //title
                   Text(
       title, //TITLE
-      style: TextStyle(
+      style:const TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 20,
       ),
@@ -41,7 +41,7 @@ class BoardingItem extends StatelessWidget {
                   Text(
       description, //DESCRIPTIONN
       textAlign: TextAlign.center,
-      style: TextStyle(
+      style:const TextStyle(
         fontSize: 16,
       ),
                   ),
@@ -52,11 +52,11 @@ class BoardingItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Color.fromARGB(255, 31, 31, 31),
+          color:const Color.fromARGB(255, 31, 31, 31),
         ),
-        padding: EdgeInsets.all(25),
-        child: Center(
-            child: const Text(
+        padding:const EdgeInsets.all(25),
+        child:const Center(
+            child: Text(
           "Shop Now",
           style: TextStyle(
               color: Colors.white,

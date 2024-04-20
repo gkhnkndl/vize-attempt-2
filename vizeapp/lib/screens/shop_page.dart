@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 import '../components/shoe_tile.dart';
@@ -21,7 +19,7 @@ class _ShopPageState extends State<ShopPage> {
     Provider.of<Cart>(context, listen: false).addItemToCart(shoe);
 
    //alert the user when successfully add 
-   showDialog(context: context, builder: (context) => AlertDialog(
+   showDialog(context: context, builder: (context) =>const AlertDialog(
     title: Text("Successfully added."),
     content: Text("Check your cart."),
    ),);
@@ -39,7 +37,7 @@ class _ShopPageState extends State<ShopPage> {
             decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.background,
                 borderRadius: BorderRadius.circular(12)),
-            child: Row(
+            child:const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Search"),
@@ -48,17 +46,17 @@ class _ShopPageState extends State<ShopPage> {
             ),
           ),
           // message
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 25),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 25),
             child: Text("If you are dead or still alive. I don't care"),
           ),
           // hot pics
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 25),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
-              children: const [
+              children: [
                 Text(
                   "Products",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
@@ -83,8 +81,8 @@ class _ShopPageState extends State<ShopPage> {
               );
             },
           )),
-          Padding(
-            padding: const EdgeInsets.only(top: 25.0, left: 25, right: 25),
+          const Padding(
+            padding: EdgeInsets.only(top: 25.0, left: 25, right: 25),
             child: Divider(color: Colors.white),
           )
         ],

@@ -77,11 +77,12 @@ final _controller = TextEditingController();
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: Text("To Do"),
+        title:const Text("To Do"),
         centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 117, 168, 255),
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       floatingActionButton: FloatingActionButton(
+        focusColor: Theme.of(context).colorScheme.background,
         onPressed: createNewTask,
         child: Icon(Icons.add, color:Theme.of(context).colorScheme.secondary,),
       ),

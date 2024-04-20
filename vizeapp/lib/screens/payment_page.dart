@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vizeapp/core/storage.dart';
@@ -97,8 +95,8 @@ class _ShopPageState extends State<PaymentPage> {
                     decoration: InputDecoration(
                         hoverColor: Colors.cyan.shade300,
                         focusColor: Theme.of(context).colorScheme.background,
-                        labelStyle: TextStyle(color: Colors.cyan),
-                        focusedBorder: OutlineInputBorder(
+                        labelStyle:const TextStyle(color: Colors.cyan),
+                        focusedBorder:const OutlineInputBorder(
                             borderSide: BorderSide(
                           color: Colors.cyan,
                         )),
@@ -115,8 +113,8 @@ class _ShopPageState extends State<PaymentPage> {
                     decoration: InputDecoration(
                         hoverColor: Colors.cyan.shade300,
                         focusColor: Theme.of(context).colorScheme.background,
-                        labelStyle: TextStyle(color: Colors.cyan),
-                        focusedBorder: OutlineInputBorder(
+                        labelStyle:const TextStyle(color: Colors.cyan),
+                        focusedBorder:const OutlineInputBorder(
                             borderSide: BorderSide(
                           color: Colors.cyan,
                         )),
@@ -138,8 +136,8 @@ class _ShopPageState extends State<PaymentPage> {
                     decoration: InputDecoration(
                         hoverColor: Colors.cyan.shade300,
                         focusColor: Theme.of(context).colorScheme.background,
-                        labelStyle: TextStyle(color: Colors.cyan),
-                        focusedBorder: OutlineInputBorder(
+                        labelStyle:const TextStyle(color: Colors.cyan),
+                        focusedBorder:const OutlineInputBorder(
                             borderSide: BorderSide(
                           color: Colors.cyan,
                         )),
@@ -166,8 +164,8 @@ class _ShopPageState extends State<PaymentPage> {
                               hoverColor: Colors.cyan.shade300,
                               focusColor:
                                   Theme.of(context).colorScheme.background,
-                              labelStyle: TextStyle(color: Colors.cyan),
-                              focusedBorder: OutlineInputBorder(
+                              labelStyle:const TextStyle(color: Colors.cyan),
+                              focusedBorder:const OutlineInputBorder(
                                   borderSide: BorderSide(
                                 color: Colors.cyan,
                               )),
@@ -194,8 +192,8 @@ class _ShopPageState extends State<PaymentPage> {
                                   Theme.of(context).colorScheme.background,
                               hintText: "Month",
                               labelText: "End",
-                              labelStyle: TextStyle(color: Colors.cyan),
-                              focusedBorder: OutlineInputBorder(
+                              labelStyle: const TextStyle(color: Colors.cyan),
+                              focusedBorder:const OutlineInputBorder(
                                   borderSide: BorderSide(
                                 color: Colors.cyan,
                               )),
@@ -216,8 +214,8 @@ class _ShopPageState extends State<PaymentPage> {
                           cursorColor: Theme.of(context).colorScheme.secondary,
                           maxLength: 2,
                           decoration: InputDecoration(
-                              labelStyle: TextStyle(color: Colors.cyan),
-                              focusedBorder: OutlineInputBorder(
+                              labelStyle: const TextStyle(color: Colors.cyan),
+                              focusedBorder:const OutlineInputBorder(
                                   borderSide: BorderSide(
                                 color: Colors.cyan,
                               )),
@@ -237,7 +235,7 @@ class _ShopPageState extends State<PaymentPage> {
                   const Gap(20),
                   SwitchListTile(
                     activeTrackColor: Theme.of(context).colorScheme.secondary,
-                    activeColor: Color.fromARGB(255, 39, 255, 32),
+                    activeColor:const Color.fromARGB(255, 39, 255, 32),
                     trackColor: overlayColor,
                     value: remember,
                     title:
@@ -281,7 +279,7 @@ class _ShopPageState extends State<PaymentPage> {
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.background,
       ),
-      body: SafeArea(
+      body: Center(        
         child: SizedBox.expand(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -292,36 +290,41 @@ class _ShopPageState extends State<PaymentPage> {
                     itemBuilder: (context, index) => AspectRatio(
                       aspectRatio: 1.586,
                       child: Container(
-                        
-                        margin: EdgeInsets.all(12),
+                        margin: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           color: Colors.transparent,
                         ),
-                        child: Stack(
+                        child: Stack(                          
                           children: [
+                            Positioned(                              
+                              height: 180,                              
+                              child: Image.asset("assets/images/creditt.png"),                              
+                            ),
                             Positioned(
-                                top: 5,
+                                top: 10,
                                 left: 20,
-                                child: Image.asset("assets/images/creditt.png"),
-                                height: 180,),
+                                child: Text(
+                                  cards[index].title,
+                                  style: const TextStyle(color: Colors.white),
+                                )),
                             Positioned(
-                                top: 20,
-                                left: 30,
-                                child: Text(cards[index].title, style: TextStyle(color: Colors.white),)),
-                            Positioned(
-                                bottom:10,
+                                top: 155,
                                 left: 40,
-                                child: Text(cards[index].cardHolder, style: TextStyle(color: Colors.white))),
+                                child: Text(cards[index].cardHolder,
+                                    style: const TextStyle(color: Colors.white))),
                             Positioned(
-                                top: 110,
+                                top: 98,
                                 left: 40,
-                                child: Text(cards[index].cardNo, style: TextStyle(fontSize: 18,color: Colors.white))),
+                                child: Text(cards[index].cardNo,
+                                    style: const TextStyle(
+                                        fontSize: 18, color: Colors.white))),
                             Positioned(
-                              bottom:30,right:120,
-                              child: Text(cards[index].expMonth +
-                                  "/" +
-                                  cards[index].expYear, style: TextStyle(color: Colors.white)),
+                              top: 130,
+                              left: 130,
+                              child: Text(
+                                  "${cards[index].expMonth}/${cards[index].expYear}",
+                                  style: const TextStyle(color: Colors.white)),
                             ),
                           ],
                         ),

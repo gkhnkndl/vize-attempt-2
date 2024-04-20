@@ -18,14 +18,14 @@ class MyBottomNavBar extends StatelessWidget {
         activeColor: Colors.blueAccent[200],tabs: const[   
            GButton(
           icon: Icons.home,
-          text: 'Kirala',
+          text: 'Shop',
         ),             
         GButton(
           icon: Icons.shopping_bag_rounded,
-          text: 'Sepet',
+          text: 'Cart',
         ),           
         GButton(icon: Icons.chat_bubble,
-        text: 'Sor Bakalım AI',
+        text: "Let's Ask AI",
         )
       ]),
     );

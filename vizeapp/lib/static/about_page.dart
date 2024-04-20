@@ -12,11 +12,11 @@ class _ShopPageState extends State<AboutPage> {
   Widget build(BuildContext context) {
     return Scaffold(     
       appBar: AppBar(
-        title: Text("About"),
+        title:const Text("About"),
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.background,
       ), 
-      body: Center(
+      body:const Center(
         child: Text("ABOUT"),
       ),
     );

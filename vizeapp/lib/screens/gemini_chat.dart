@@ -20,7 +20,7 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(      
       debugShowCheckedModeBanner: false,
-      title: 'Sor Bakalım',      
+      title: "Let's Ask",      
       theme: ThemeData(        
           colorScheme: ColorScheme.fromSeed(
           brightness: Brightness.dark,
@@ -28,7 +28,7 @@ class ChatPage extends StatelessWidget {
         ),
         useMaterial3: true,
       ),      
-      home: const ChatScreen(title: 'Sor Bakalım'),
+      home: const ChatScreen(title: "Let's Ask"),
     );
   }
 }

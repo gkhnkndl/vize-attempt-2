@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../models/shoe.dart';
 
@@ -12,7 +10,7 @@ class ShoeTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 20),
+      margin:const EdgeInsets.only(left: 20),
       width: 280,
       decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.primary, borderRadius: BorderRadius.circular(12)),
@@ -48,7 +46,7 @@ class ShoeTile extends StatelessWidget {
                     const SizedBox(height: 5),
 
                     Text(
-                      '\$' + shoe.price,
+                      '\$${shoe.price}',
                       style: const TextStyle(
                           color: Color.fromARGB(255, 30, 207, 7)),
                     ),

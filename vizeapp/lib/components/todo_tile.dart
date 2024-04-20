@@ -21,18 +21,21 @@ class ToDoTile extends StatelessWidget {
       padding: const EdgeInsets.only(left: 25.0, right: 25, top: 25),
       child: Slidable(
         endActionPane: ActionPane(
-          motion: StretchMotion(),
+          motion:const StretchMotion(),
           children: [
             SlidableAction(
               onPressed: deleteFunction,
               icon: Icons.delete,
-              backgroundColor: Theme.of(context).colorScheme.background,
-              borderRadius: BorderRadius.all(Radius.circular(12)),
+              backgroundColor: Colors.red.shade400,
+              borderRadius:const BorderRadius.all(Radius.circular(12)),
             )
           ],
         ),
         child: Container(
-          padding: EdgeInsets.all(24),
+          padding:const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.background,
+              borderRadius: BorderRadius.circular(12)),
           child: Row(
             children: [
               // checkbox
@@ -51,9 +54,6 @@ class ToDoTile extends StatelessWidget {
               ),
             ],
           ),
-          decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.background,
-              borderRadius: BorderRadius.circular(12)),
         ),
       ),
     );

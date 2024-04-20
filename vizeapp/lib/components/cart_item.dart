@@ -26,13 +26,13 @@ class _CartItemState extends State<CartItem> {
       decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.secondary,
           borderRadius: BorderRadius.circular(12)),
-      margin: EdgeInsets.only(bottom: 10),
+      margin:const EdgeInsets.only(bottom: 10),
       child: ListTile(
         leading: Image.asset(widget.shoe.imagePath),
         title: Text(widget.shoe.name),
         subtitle: Text(widget.shoe.price),
         trailing: IconButton(
-          icon: Icon(Icons.delete),
+          icon:const Icon(Icons.delete),
           onPressed: () => removeItemFromCart(),
         ),
       ),

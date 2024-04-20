@@ -2,17 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:vizeapp/models/cart.dart';
-import 'package:vizeapp/screens/gemini_chat.dart';
-import 'package:vizeapp/screens/home_page.dart';
-import 'package:vizeapp/static/boarding_page.dart';
-import 'package:vizeapp/screens/settings_page.dart';
-import 'package:vizeapp/screens/todopage.dart';
-import 'package:google_generative_ai/google_generative_ai.dart';
-import 'package:vizeapp/theme/theme.dart';
-import 'package:vizeapp/theme/theme_provider.dart';
-import 'package:vizeapp/components/todo_tile.dart';
 
 import '../core/routes.dart';
+import 'theme/theme_provider.dart';
 
 void main() async {
 
@@ -23,11 +15,11 @@ void main() async {
   var box = await Hive.openBox('mybox');
 
   runApp( ChangeNotifierProvider(create: (context) => ThemeProvider(),
-  child: MyApp(),));
+  child: const MyApp(),));
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
  
 
   @override
