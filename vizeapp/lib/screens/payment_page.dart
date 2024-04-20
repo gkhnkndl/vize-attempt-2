@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:vizeapp/core/storage.dart';
 
 import '../models/credit_card.dart';
@@ -54,6 +57,18 @@ class _ShopPageState extends State<PaymentPage> {
     }
     setState(() {
       cards = newCardList;
+    });
+
+    context.pop();
+
+    setState(() {
+      remember = false;
+      cardNoCnt.text = "";
+      cardHolderCnt.text = "";
+      expMonthCnt.text = "";
+      expYearCnt.text = "";
+      cvv2Cnt.text = "";
+      titleCnt.text = "";
     });
   }
 
@@ -274,7 +289,44 @@ class _ShopPageState extends State<PaymentPage> {
                 ? const Center(child: Text("No Card Found"))
                 : ListView.builder(
                     itemCount: cards.length,
-                    itemBuilder: (context, index) => Text("card"),
+                    itemBuilder: (context, index) => AspectRatio(
+                      aspectRatio: 1.586,
+                      child: Container(
+                        
+                        margin: EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.transparent,
+                        ),
+                        child: Stack(
+                          children: [
+                            Positioned(
+                                top: 5,
+                                left: 20,
+                                child: Image.asset("assets/images/creditt.png"),
+                                height: 180,),
+                            Positioned(
+                                top: 20,
+                                left: 30,
+                                child: Text(cards[index].title, style: TextStyle(color: Colors.white),)),
+                            Positioned(
+                                bottom:10,
+                                left: 40,
+                                child: Text(cards[index].cardHolder, style: TextStyle(color: Colors.white))),
+                            Positioned(
+                                top: 110,
+                                left: 40,
+                                child: Text(cards[index].cardNo, style: TextStyle(fontSize: 18,color: Colors.white))),
+                            Positioned(
+                              bottom:30,right:120,
+                              child: Text(cards[index].expMonth +
+                                  "/" +
+                                  cards[index].expYear, style: TextStyle(color: Colors.white)),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
           ),
         ),
