@@ -44,6 +44,12 @@ dependencies:
   gap: ^3.0.1
   preload_page_view: ^0.2.0
   flutter_secure_storage: ^9.0.0
+  flutter_launcher_icons: "^0.13.1"
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo.png"
 
   
 
