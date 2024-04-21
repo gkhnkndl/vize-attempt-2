@@ -56,9 +56,17 @@ class Storage {
     storage.setBool("runned", true);
   }
 
-  clearStorage() async {
+  setConfig({String? language}) async {
     final SharedPreferences storage = await SharedPreferences.getInstance();
-    await storage.clear();
+
+    if (language != null) {
+      await storage.setString("language", language);
+    }
+  }
+
+  GetConfig() async {
+    final SharedPreferences storage = await SharedPreferences.getInstance();
+    return {"language": storage.getString("language")};
   }
 
   Future<List<PaymentCard>> loadCards() async {
