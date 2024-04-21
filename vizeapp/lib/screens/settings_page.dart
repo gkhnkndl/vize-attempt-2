@@ -1,10 +1,11 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:vizeapp/theme/theme_provider.dart';
+
+import '../bloc/client/client_cubit.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -17,6 +18,8 @@ class _SettingsPageState extends State<SettingsPage> {
   MaterialStateProperty<Color?> overlayColor =
       MaterialStateColor.resolveWith((states) => Colors.grey);
   bool isSwitched = false;
+  bool isSwitchedLanguage = false;
+  late ClientCubit clientCubit;
 
   String camResult = "";
   String locationResult = "";
@@ -93,9 +96,11 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   void initState() {
-    controlPermission();
-    super.initState();
+    controlPermission();    
+    super.initState();     
+    clientCubit = context.read<ClientCubit>();   
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -134,6 +139,32 @@ class _SettingsPageState extends State<SettingsPage> {
                 height: 25,
               ),
               Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: Row(
+                  children: [
+                    Text("Language: ", style: TextStyle(fontSize: 25)),
+                    Gap(10),
+                    Text("EN"),
+                    Row(
+                      children: [                        
+                        Switch(
+                          activeTrackColor: Colors.white,
+                          activeColor: Colors.red.shade400,
+                          value: isSwitchedLanguage,
+                          onChanged: (value) => setState(
+                            () {
+                              isSwitchedLanguage = value;
+                              
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    Text("TR"),
+                  ],
+                ),
+              ),
+              /*Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: Row(
                   children: [
@@ -150,7 +181,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ],
                 ),
-              ),
+              ),*/
               const Gap(50),
               ExpansionTile(
                 title: const Text("Camera Permissions"),

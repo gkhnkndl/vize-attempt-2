@@ -64,7 +64,7 @@ class Storage {
     }
   }
 
-  GetConfig() async {
+  getConfig() async {
     final SharedPreferences storage = await SharedPreferences.getInstance();
     return {"language": storage.getString("language")};
   }

@@ -18,3 +18,8 @@ ThemeData darkMode = ThemeData(
     secondary: Colors.grey.shade700,
   )
 );
+//https://rydmike.com/flexcolorscheme/themesplayground-latest/
+
+//https://zoom.us/rec/play/3EEsmTcETFV6GH-57WbeEGtitcgfoU1jU0Td3O9T4y838kndv2rkIv4e0aR463fwtWl1e1jxR6xGScA2.vEUjqIJXZCmi5D--?hasValidToken=false&canPlayFromShare=true&from=share_recording_detail&continueMode=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fzoom.us%2Frec%2Fshare%2F-qsz9DNJBSsVmP37OyFzrShLiI2JsdypNE2aN2wsiuTWCACNbZQosKa_wWIlb0Px.x_2XI7AOPeLtjVkS&autoplay=true&startTime=1709712781000
+
+//01:05:45 kısım

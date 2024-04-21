@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:vizeapp/bloc/client/client_cubit.dart';
 import 'package:vizeapp/models/cart.dart';
 
 import '../core/routes.dart';
@@ -24,12 +26,29 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(create: (context) => Cart(),
+    /*daha önce ChangeNotifierProvider kullandım
+    bu yüzden BlocProvider kullanmak için MultiProvider kullandım
+    https://stackoverflow.com/questions/61052629/how-to-add-multiple-changenotifierprovider-in-same-type-in-flutter
+    */ 
+    return MultiProvider(providers: [
+      //Add cart ve cart item için provider
+      ChangeNotifierProvider(create: (context) => Cart(), //54:59
     builder: (context, child) => MaterialApp.router(
       routerConfig: routes,
        title: "SneakerPlace",      
       debugShowCheckedModeBanner: false,      
       theme: Provider.of<ThemeProvider>(context).themeData,
-    ));
+    )),
+    //Language için provider
+    BlocProvider(create: (context) => ClientCubit(ClientState(language: "en")),/*child: 
+    BlocBuilder<ClientCubit, ClientState>(builder: (context, state) {
+      return MaterialApp.router(
+      routerConfig: routes,
+       title: "SneakerPlace",      
+      debugShowCheckedModeBanner: false,      
+      theme: Provider.of<ThemeProvider>(context).themeData,
+    );
+    },)*/)
+    ]);
   }
 }
