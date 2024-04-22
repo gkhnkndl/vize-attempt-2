@@ -18,9 +18,9 @@ class AddressCubit extends Cubit<AddressState> {
     presentAddress.add({
       "contry": ulke,
       "city": sehir,
-      "local": mahalle,
+      "district": mahalle,
       "street": sokak,
-      "build": bina,
+      "apartment": bina,
       "house": daire,
       "postalCode": postaKodu
     });
