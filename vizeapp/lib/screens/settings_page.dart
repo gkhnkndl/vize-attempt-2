@@ -19,10 +19,11 @@ class _SettingsPageState extends State<SettingsPage> {
       MaterialStateColor.resolveWith((states) => Colors.grey);
   bool isSwitched = false;
   bool isSwitchedLanguage = false;
-  late ClientCubit clientCubit;
 
   String camResult = "";
   String locationResult = "";
+  
+  
 
   controlPermission() async {
     var status = await Permission.camera.status;
@@ -98,7 +99,6 @@ class _SettingsPageState extends State<SettingsPage> {
   void initState() {
     controlPermission();    
     super.initState();     
-    clientCubit = context.read<ClientCubit>();   
   }
 
 
@@ -164,7 +164,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   ],
                 ),
               ),
-              /*Padding(
+              Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: Row(
                   children: [
@@ -181,7 +181,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ],
                 ),
-              ),*/
+              ),
               const Gap(50),
               ExpansionTile(
                 title: const Text("Camera Permissions"),

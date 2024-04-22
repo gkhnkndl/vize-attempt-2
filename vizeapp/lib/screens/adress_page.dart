@@ -4,35 +4,25 @@ import 'package:vizeapp/bloc/adress/address_cubit.dart';
 
 import '../components/address_add.dart';
 
-class AddressPage extends StatelessWidget {
-  const AddressPage({Key? key}) : super(key: key);
+class AddressPage extends StatefulWidget {
+  const AddressPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AddressCubit(AddressState(address: [])),
-      child: AddressPageContent(),
-    );
-  }
+  State<AddressPage> createState() => _ShopPageState();
 }
 
-class AddressPageContent extends StatefulWidget {
-  @override
-  State<AddressPageContent> createState() => _AddressPageContentState();
-}
-
-class _AddressPageContentState extends State<AddressPageContent> {
-  
-
+class _ShopPageState extends State<AddressPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(     
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        title:const Text("Address"),
         centerTitle: true,
-        title: Text('Addresses'),
+        backgroundColor: Theme.of(context).colorScheme.background,
+      ), 
+      body:const Center(
+        child: Text("ADDRESS"),
       ),
-      body: AddressAddView()
     );
   }
 }
