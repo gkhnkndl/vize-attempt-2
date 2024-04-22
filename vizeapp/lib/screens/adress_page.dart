@@ -2,26 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vizeapp/bloc/adress/address_cubit.dart';
 
-import '../components/address_add.dart';
-
 class AddressPage extends StatefulWidget {
-  const AddressPage({super.key});
+  const AddressPage({Key? key}) : super(key: key);
 
   @override
-  State<AddressPage> createState() => _ShopPageState();
+  State<AddressPage> createState() => _AddressPageState();
 }
 
-class _ShopPageState extends State<AddressPage> {
+class _AddressPageState extends State<AddressPage> {
+
+  
+  late AddressCubit addressCubit;
+
+  @override
+  void initState() {
+    addressCubit = context.read<AddressCubit>();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(     
+    return Scaffold(
       appBar: AppBar(
-        title:const Text("Address"),
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.background,
-      ), 
-      body:const Center(
-        child: Text("ADDRESS"),
+      ),
+      body: Column(
+        children: [
+          const Center(
+            child: Text("ADDRESS"),
+          ),
+          Center(
+            child: BlocBuilder<AddressCubit, AddressState>(
+              builder: (context, state) {
+                return Text("Addresses: " + addressCubit.state.address.toString());
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

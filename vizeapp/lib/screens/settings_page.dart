@@ -164,24 +164,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Row(
-                  children: [
-                    const Text("Lanuage: ", style: TextStyle(fontSize: 25)),
-                    MaterialButton(
-                      onPressed: () =>
-                          Provider.of<ThemeProvider>(context, listen: false)
-                              .toggleTheme(),
-                      color: Theme.of(context).primaryColor,
-                      child: const Text(
-                        "En-Tr",
-                        style: TextStyle(fontSize: 25),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              const Text(""),             
               const Gap(50),
               ExpansionTile(
                 title: const Text("Camera Permissions"),
