@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 theme: Provider.of<ThemeProvider>(context).themeData,
               )),
-              //language provider
+      //language provider
       BlocProvider(
         create: (context) => ClientCubit(ClientState(language: "en")),
       ),

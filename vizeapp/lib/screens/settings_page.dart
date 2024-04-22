@@ -142,9 +142,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Row(
                   children: [
-                    Text("Language: ", style: TextStyle(fontSize: 25)),
-                    Gap(10),
-                    Text("EN"),
+                    const Text("Language: ", style: TextStyle(fontSize: 25)),
+                    const Gap(10),
+                    const Text("EN"),
                     Row(
                       children: [                        
                         Switch(
@@ -160,7 +160,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         ),
                       ],
                     ),
-                    Text("TR"),
+                    const Text("TR"),
                   ],
                 ),
               ),
