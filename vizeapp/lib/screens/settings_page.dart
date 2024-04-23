@@ -48,7 +48,7 @@ class _SettingsPageState extends State<SettingsPage> {
     await prefs.setBool("isswitched", isSwitched);
     await prefs.setBool("isswitchedlang", isSwitchedLanguage);
   }
-  //location and camera permission
+  //location and camera permissin
   void controlPermission() async {
     var status = await Permission.camera.status;
     var statusLocation = await Permission.location.status;

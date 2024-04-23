@@ -8,6 +8,7 @@ class AddressCubit extends Cubit<AddressState> {
   addAddress({
     required String ulke,
     required String sehir,
+    required String ilce,
     required String mahalle,
     required String sokak,
     required String bina,
@@ -16,9 +17,10 @@ class AddressCubit extends Cubit<AddressState> {
   }) {
     var presentAddress = state.address;
     presentAddress.add({
-      "contry": ulke,
+      "country": ulke,
       "city": sehir,
-      "district": mahalle,
+      "district":ilce,
+      "neighborhood": mahalle,
       "street": sokak,
       "apartment": bina,
       "house": daire,
@@ -33,6 +35,7 @@ class AddressCubit extends Cubit<AddressState> {
   removeAddress({
     required String ulke,
     required String sehir,
+    required String ilce,
     required String mahalle,
     required String sokak,
     required String bina,
