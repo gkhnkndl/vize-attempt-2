@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:vizeapp/bloc/adress/address_cubit.dart';
 import 'package:vizeapp/bloc/client/client_cubit.dart';
+import 'package:vizeapp/core/localization.dart';
 import 'package:vizeapp/models/cart.dart';
 
 import '../core/routes.dart';
@@ -39,8 +41,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) => ClientCubit(ClientState(language: "en"))),
         BlocProvider(
-          create: (context) => AddressCubit(AddressState(address: [])),
-        )
+          create: (context) => AddressCubit(AddressState(address: [])),          
+        ),
+        
+
       ],
       child: ChangeNotifierProvider(
           create: (context) => Cart(), //54:59
@@ -49,6 +53,17 @@ class MyApp extends StatelessWidget {
                 title: "SneakerPlace",
                 debugShowCheckedModeBanner: false,
                 theme: Provider.of<ThemeProvider>(context).themeData,
+                localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en', 'US'),
+            Locale('tr', 'TR'),
+          ],
+          locale: Locale(context.watch<ClientCubit>().state.language),
               )),
     );
   }

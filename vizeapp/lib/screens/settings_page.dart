@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
+import 'package:vizeapp/core/localization.dart';
 import 'package:vizeapp/theme/theme_provider.dart';
 
 import '../bloc/client/client_cubit.dart';
@@ -24,10 +25,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
   String camResult = "";
   String locationResult = "";
-  
 
-  
-  
+  late ClientCubit clientCubit;
 
   controlPermission() async {
     var status = await Permission.camera.status;
@@ -101,10 +100,10 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   void initState() {
-    controlPermission();    
-    super.initState();     
+    clientCubit = context.read<ClientCubit>();
+    controlPermission();
+    super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -120,92 +119,118 @@ class _SettingsPageState extends State<SettingsPage> {
             child: Padding(
               padding: const EdgeInsets.only(top: 55),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                    child: Row(
+                    child: Column(
                       children: [
-                        const Text("Theme: ", style: TextStyle(fontSize: 25)),
-                        Switch(
-                          activeTrackColor: Theme.of(context).colorScheme.secondary,
-                          activeColor: const Color.fromARGB(255, 218, 221, 211),
-                          value: isSwitched,
-                          onChanged: (value) => setState(
-                            () {
-                              isSwitched = value;
-                              Provider.of<ThemeProvider>(context, listen: false)
-                                  .toggleTheme();
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Row(
-                      children: [
-                        const Text("Language: ", style: TextStyle(fontSize: 25)),
-                        const Gap(10),
-                        const Text("EN"),
                         Row(
-                          children: [                        
+                          children: [
+                            Text(
+                                AppLocalizations.of(context)
+                                    .getTranslate("settings_theme"),
+                                style: TextStyle(fontSize: 25)),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            const Text("Light"),
                             Switch(
-                              activeTrackColor: Colors.white,
-                              activeColor: Colors.red.shade400,
-                              value: isSwitchedLanguage,
+                              activeTrackColor:
+                                  Theme.of(context).colorScheme.secondary,
+                              activeColor: const Color.fromARGB(255, 218, 221, 211),
+                              value: isSwitched,
                               onChanged: (value) => setState(
                                 () {
-                                  isSwitchedLanguage = value;
-                                  
+                                  isSwitched = value;
+                                  Provider.of<ThemeProvider>(context, listen: false)
+                                      .toggleTheme();
                                 },
                               ),
                             ),
+                            const Text("Dark"),
                           ],
                         ),
-                        const Text("TR"),
+                        const Gap(25),
+                        Row(
+                          children: [
+                            Text(
+                                AppLocalizations.of(context)
+                                    .getTranslate("settings_language"),
+                                style: TextStyle(fontSize: 25)),
+                            const Gap(5),
+                            Text(clientCubit.state.language),
+                          ],
+                        ),
+                        const Gap(10),
+                        Column(                    
+                          children: [
+                            Row(
+                              children: [
+                                const Text("EN"),
+                                Switch(
+                                  activeTrackColor: Colors.white,
+                                  activeColor: Colors.red.shade400,
+                                  value: isSwitchedLanguage,
+                                  onChanged: (value) => setState(
+                                    () {
+                                      if (isSwitchedLanguage = value) {
+                                        clientCubit.changeLang(language: "tr");
+                                        isSwitchedLanguage = true;
+                                      } else {
+                                        clientCubit.changeLang(language: "en");
+                                        isSwitchedLanguage = false;
+                                      }
+                                    },
+                                  ),
+                                ),
+                                const Text("TR"),
+                              ],
+                            ),
+                          ],
+                        ),
+                        const Text(""),
+                        const Gap(50),
+                        ExpansionTile(
+                          title: Text(AppLocalizations.of(context)
+                              .getTranslate("settings_camera")),
+                          children: [
+                            Text(camResult),
+                            const Gap(10),
+                            ElevatedButton(
+                                style: ButtonStyle(backgroundColor: overlayColor),
+                                onPressed: () async {
+                                  final status = await Permission.camera.request();
+                                },
+                                child: const Text("Ask for Permission")),
+                            const Gap(10),
+                          ],
+                        ),
+                        const Gap(10),
+                        ExpansionTile(
+                          title: Text(AppLocalizations.of(context)
+                              .getTranslate("settings_locate")),
+                          children: [
+                            Text(locationResult),
+                            const Gap(10),
+                            ElevatedButton(
+                                style: ButtonStyle(backgroundColor: overlayColor),
+                                onPressed: () async {
+                                  final status = await Permission.location.request();
+                                },
+                                child: const Text("Ask for Permission")),
+                            const Gap(10),
+                          ],
+                        ),
                       ],
                     ),
-                  ),
-                  const Text(""),             
-                  const Gap(50),
-                  ExpansionTile(
-                    title: const Text("Camera Permissions"),
-                    children: [
-                      Text(camResult),
-                      const Gap(10),
-                      ElevatedButton(
-                          style: ButtonStyle(backgroundColor: overlayColor),
-                          onPressed: () async {
-                            final status = await Permission.camera.request();
-                          },
-                          child:const Text("Ask for Permission")),
-                      const Gap(10),
-                    ],
-                  ),
-                  const Gap(10),
-                  ExpansionTile(
-                    title: const Text("Location Permissions"),
-                    children: [
-                      Text(locationResult),
-                      const Gap(10),
-                      ElevatedButton(
-                          style: ButtonStyle(backgroundColor: overlayColor),
-                          onPressed: () async {
-                            final status = await Permission.location.request();
-                          },
-                          child:const Text("Ask for Permission")),
-                          const Gap(10),
-                    ],
                   ),
                 ],
               ),
             ),
           );
-        }        
+        },
       ),
     );
   }
