@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 
+import '../core/localization.dart';
+
 /// The API key to use when accessing the Gemini API.
 ///
 /// To learn how to generate and specify this key,
@@ -20,7 +22,7 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(      
       debugShowCheckedModeBanner: false,
-      title: "Let's Ask",      
+      title: AppLocalizations.of(context).getTranslate("shopping_navAsk"),      
       theme: ThemeData(        
           colorScheme: ColorScheme.fromSeed(
           brightness: Brightness.dark,
@@ -28,8 +30,8 @@ class ChatPage extends StatelessWidget {
         ),
         useMaterial3: true,
       ),      
-      home: const ChatScreen(title: "Let's Ask"),
-    );
+      home: ChatScreen(title: AppLocalizations.of(context).getTranslate("shopping_navAsk"),
+    ));
   }
 }
 

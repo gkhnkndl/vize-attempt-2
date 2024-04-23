@@ -13,9 +13,18 @@
     "drawer_credit":"Saved Credit Cards",
     "drawer_todo":"To Do List",
     "drawer_settings":"Settings",
-    "drawer_about":"About",
+    "drawer_about":"About",    
     "settings_theme":"Theme",
     "settings_language":"Language",
     "settings_camera":"Camera Permissions",
-    "settings_locate":"Location Permissions"
+    "settings_locate":"Location Permissions",
+    "add_new_task": "Add new task",
+    "save":"Save",
+    "cancel":"Cancel",
+    "address_page":"Address Page",
+    "drawer_logoutx":"Logout",
+    "home_description":"The best application for buying shoes"
+
+
+    
 }

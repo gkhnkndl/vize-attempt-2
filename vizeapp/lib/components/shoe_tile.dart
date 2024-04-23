@@ -13,7 +13,7 @@ class ShoeTile extends StatelessWidget {
       margin:const EdgeInsets.only(left: 20),
       width: 280,
       decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary, borderRadius: BorderRadius.circular(12)),
+          color: Theme.of(context).colorScheme.onPrimary, borderRadius: BorderRadius.circular(12)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -24,7 +24,7 @@ class ShoeTile extends StatelessWidget {
           //description
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(shoe.descripton),
+            child: Text(shoe.descripton, style: TextStyle(color: Theme.of(context).colorScheme.onPrimaryContainer),),
           ),
           //price + detail
           Padding(
@@ -39,7 +39,7 @@ class ShoeTile extends StatelessWidget {
                     //shoe name
                     Text(
                       shoe.name,
-                      style: const TextStyle(
+                      style: TextStyle(color: Theme.of(context).colorScheme.onSecondaryContainer,
                           fontWeight: FontWeight.bold, fontSize: 16,),
                     ),
                     // price
@@ -48,7 +48,7 @@ class ShoeTile extends StatelessWidget {
                     Text(
                       '\$${shoe.price}',
                       style: const TextStyle(
-                          color: Color.fromARGB(255, 30, 207, 7)),
+                          color: Color.fromARGB(255, 29, 173, 10)),
                     ),
                   ],
                 ),
@@ -57,20 +57,19 @@ class ShoeTile extends StatelessWidget {
                   onTap: onTap,
                   child: Container(
                       padding: const EdgeInsets.all(20),
-                      decoration: const BoxDecoration(
-                          color: Colors.black,
+                      decoration:  BoxDecoration(
+                          color: Theme.of(context).colorScheme.onPrimaryContainer,
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(15),
                               bottomRight: Radius.circular(15))),
-                      child: const Icon(
+                      child: Icon(
                         Icons.add,
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.primaryContainer,
                       )),
                 )
               ],
             ),
           )
-          // button to add cart
         ],
       ),
     );

@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:vizeapp/bloc/adress/address_cubit.dart';
 
+import '../core/localization.dart';
+
 class AddressPage extends StatefulWidget {
   const AddressPage({Key? key}) : super(key: key);
 
@@ -37,7 +39,7 @@ class _AddressPageState extends State<AddressPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Address Page"),
+        title: Text(AppLocalizations.of(context).getTranslate("address_page")),
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.background,
       ),
@@ -81,7 +83,7 @@ class _AddressPageState extends State<AddressPage> {
                             postaKodu: postalCodeController.text,
                           );
                     },
-                    child: Text("Save Address"),
+                    child: Text(AppLocalizations.of(context).getTranslate("save")),
                   ),
                   SizedBox(height: 20), // Araya boşluk ekledik
                   Container(
@@ -160,6 +162,3 @@ class CustomTextFormField extends StatelessWidget {
     );
   }
 }
-/*Text(
-                                "${index + 1}. ${tempAddress['country']}, ${tempAddress['city']}, ${tempAddress['district']},${tempAddress['neighborhood']}, ${tempAddress['street']}, ${tempAddress['apartment']}, ${tempAddress['house']}, ${tempAddress['postalCode']}",
-                              );   */

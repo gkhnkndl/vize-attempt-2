@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../core/localization.dart';
+
 class BoardingItem extends StatelessWidget {
   final String image;
   final String title;
@@ -55,9 +57,10 @@ class BoardingItem extends StatelessWidget {
           color:const Color.fromARGB(255, 31, 31, 31),
         ),
         padding:const EdgeInsets.all(25),
-        child:const Center(
+        child: Center(
             child: Text(
-          "Shop Now",
+          AppLocalizations.of(context)
+                                  .getTranslate("boarding_button"),
           style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,

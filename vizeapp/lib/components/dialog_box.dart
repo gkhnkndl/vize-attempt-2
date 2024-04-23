@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vizeapp/components/my_button.dart';
 
+import '../core/localization.dart';
+
 class DialogBox extends StatelessWidget {
   final controller;
   VoidCallback onSave;
@@ -19,9 +21,9 @@ class DialogBox extends StatelessWidget {
             //get user input
             TextField(
               controller: controller,
-              decoration:const InputDecoration(
+              decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                hintText: "Add a new task",
+                hintText: AppLocalizations.of(context).getTranslate("add_new_task"),
               ),
             ),
 
@@ -31,14 +33,14 @@ class DialogBox extends StatelessWidget {
               children: [
                 //save button
                 MyButton(
-                  text: "Save",
+                  text: AppLocalizations.of(context).getTranslate("save"),
                   onPressed: onSave,
                 ),
 
                 const SizedBox(width: 10),
                 //cancel button
                 MyButton(
-                  text: "Cancel",
+                  text: AppLocalizations.of(context).getTranslate("cancel"),
                   onPressed: onCancel,
                 )
               ],

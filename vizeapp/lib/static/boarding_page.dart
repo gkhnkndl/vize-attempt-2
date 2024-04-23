@@ -59,6 +59,7 @@ class _BoardingPageState extends State<BoardingPage> {
                 description: boardingData[index]["description"]!)),
       ),
       bottomNavigationBar: SizedBox(
+          
           height: 70,
           child: Align(
             alignment: Alignment.center,

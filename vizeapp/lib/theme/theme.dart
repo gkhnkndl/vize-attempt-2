@@ -2,20 +2,32 @@ import 'package:flutter/material.dart';
 
 ThemeData lightMode = ThemeData(
   brightness: Brightness.light,
-  colorScheme: ColorScheme.light(
-    background: const Color.fromARGB(255, 228, 228, 228),
-    primary:  Color.fromARGB(255, 240, 240, 240),
-    secondary: Color.fromARGB(255, 90, 90, 90),
+  colorScheme:const ColorScheme.light(
+    background: Color(0xFFF8FAFC),
+    primary:  Color(0xFF0061A4),
+    primaryContainer: Color(0xFFD1E4FF),    
+    secondary: Color(0xFF006781),
+    secondaryContainer: Color(0xFFB9EAFF),
+    onPrimary: Color(0xFFFFFFFF),
+    onPrimaryContainer: Color(0xFF111314),
+    onSecondary: Color(0xFFFFFFFF),
+    onSecondaryContainer: Color(0xFF101314)
   )
 );
 
 
 ThemeData darkMode = ThemeData(
   brightness: Brightness.dark,
-  colorScheme: ColorScheme.dark(
-    background: Colors.grey.shade900,
-    primary: Colors.grey.shade800,
-    secondary: Colors.grey.shade700,
+  colorScheme:const ColorScheme.dark(
+    background: Color(0xFF181A1D),
+    primary:  Color(0xFF9ECAFF),
+    primaryContainer: Color(0xFF00497D),    
+    secondary: Color(0xFF86D1EE),
+    secondaryContainer: Color(0xFF004D62),
+    onPrimary: Color(0xFF101314),
+    onPrimaryContainer: Color(0xFFDFEBF3),
+    onSecondary: Color(0xFF0E1414),
+    onSecondaryContainer: Color(0xFFDFEBEF)   
   )
 );
 //https://rydmike.com/flexcolorscheme/themesplayground-latest/

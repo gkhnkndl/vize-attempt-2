@@ -24,7 +24,7 @@ class _CartItemState extends State<CartItem> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.secondary,
+          color: Theme.of(context).colorScheme.onPrimary,
           borderRadius: BorderRadius.circular(12)),
       margin:const EdgeInsets.only(bottom: 10),
       child: ListTile(

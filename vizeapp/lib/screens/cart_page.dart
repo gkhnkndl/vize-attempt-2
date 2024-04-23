@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../components/cart_item.dart';
+import '../core/localization.dart';
 import '../models/cart.dart';
 import '../models/shoe.dart';
 
@@ -22,8 +23,8 @@ class _ShopPageState extends State<CartPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // heading
-            const Text(
-              "My Cart",
+             Text(
+              AppLocalizations.of(context).getTranslate("shopping_navCart"),
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(

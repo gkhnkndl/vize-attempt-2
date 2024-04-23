@@ -8,6 +8,8 @@ import 'package:vizeapp/screens/gemini_chat.dart';
 import 'package:vizeapp/screens/shop_page.dart';
 import 'package:vizeapp/screens/todopage.dart';
 
+import '../core/localization.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -66,42 +68,42 @@ class _HomePageState extends State<HomePage> {
                 // other pages
                 InkWell(
                   onTap: () => GoRouter.of(context).push("/home"),
-                  child: const Padding(
-                    padding: const EdgeInsets.only(left: 25),
+                  child:  Padding(
+                    padding:  EdgeInsets.only(left: 25),
                     child: ListTile(
-                      leading: Icon(Icons.home),
-                      title: Text("Home"),
+                      leading: Icon(Icons.home, color: Theme.of(context).colorScheme.onPrimaryContainer,),
+                      title: Text(AppLocalizations.of(context).getTranslate("drawer_home")),
                     ),
                   ),
                 ),
                 InkWell(
                   onTap: () => GoRouter.of(context).push("/address"),
-                  child: const Padding(
-                    padding: const EdgeInsets.only(left: 25),
+                  child:  Padding(
+                    padding:  EdgeInsets.only(left: 25),
                     child: ListTile(
                       leading: Icon(Icons.location_city),
-                      title: Text("My Address"),
+                      title: Text(AppLocalizations.of(context).getTranslate("drawer_address")),
                     ),
                   ),
                 ),
                 InkWell(
                   onTap: () => GoRouter.of(context).push("/credit"),
-                  child: const Padding(
-                    padding: const EdgeInsets.only(left: 25),
+                  child:  Padding(
+                    padding:  EdgeInsets.only(left: 25),
                     child: ListTile(
                       leading: Icon(Icons.credit_card),
-                      title: Text("Saved Credit Cards"),
+                      title: Text(AppLocalizations.of(context).getTranslate("drawer_credit")),
                     ),
                   ),
                 ),
                 InkWell(
                   onTap: () => GoRouter.of(context).push("/todo"),
                   child: Container(
-                    child: const Padding(
-                      padding: const EdgeInsets.only(left: 25),
+                    child:  Padding(
+                      padding:  EdgeInsets.only(left: 25),
                       child: ListTile(
                         leading: Icon(Icons.list),
-                        title: Text("To Do List"),
+                        title: Text(AppLocalizations.of(context).getTranslate("drawer_todo")),
                       ),
                     ),
                   ),
@@ -109,11 +111,11 @@ class _HomePageState extends State<HomePage> {
                 InkWell(
                   onTap: () => GoRouter.of(context).push("/settings"),
                   child: Container(
-                    child: const Padding(
-                      padding: const EdgeInsets.only(left: 25),
+                    child:  Padding(
+                      padding:  EdgeInsets.only(left: 25),
                       child: ListTile(
                         leading: Icon(Icons.settings),
-                        title: Text("Settings"),
+                        title: Text(AppLocalizations.of(context).getTranslate("drawer_settings")),
                       ),
                     ),
                   ),
@@ -121,11 +123,11 @@ class _HomePageState extends State<HomePage> {
 
                 InkWell(
                   onTap: () => GoRouter.of(context).push("/about"),
-                  child: const Padding(
-                    padding: const EdgeInsets.only(left: 25),
+                  child:  Padding(
+                    padding:  EdgeInsets.only(left: 25),
                     child: ListTile(
                       leading: Icon(Icons.info),
-                      title: Text("About"),
+                      title: Text(AppLocalizations.of(context).getTranslate("drawer_about")),
                     ),
                   ),
                 ),
