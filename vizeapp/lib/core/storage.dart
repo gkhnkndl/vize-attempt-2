@@ -60,7 +60,7 @@ class Storage {
     final SharedPreferences storage = await SharedPreferences.getInstance();
 
     if (language != null) {
-      await storage.setString("language", language);
+      await storage.setString("language", language);      
     }
   }
 
@@ -96,4 +96,6 @@ class Storage {
 
     await storage.write(key: "paymentCards", value: jsonEncode(cardsString));
   }
+   
 }
+

@@ -1,108 +1,81 @@
 import 'dart:js_interop';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vizeapp/core/localization.dart';
 import 'package:vizeapp/theme/theme_provider.dart';
-
 import '../bloc/client/client_cubit.dart';
 
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({super.key});
+  const SettingsPage({Key? key}) : super(key: key);
 
   @override
   State<SettingsPage> createState() => _SettingsPageState();
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  MaterialStateProperty<Color?> overlayColor =
-      MaterialStateColor.resolveWith((states) => Colors.grey);
+  late ClientCubit clientCubit;
+
   bool isSwitched = false;
   bool isSwitchedLanguage = false;
-
   String camResult = "";
   String locationResult = "";
 
-  late ClientCubit clientCubit;
-
-  controlPermission() async {
-    var status = await Permission.camera.status;
-    var statusLocation = await Permission.location.status;
-
-    switch (status) {
-      case (PermissionStatus.granted):
-        setState(() {
-          camResult = "Yetki Onaylandi";
-        });
-        break;
-      case (PermissionStatus.denied):
-        setState(() {
-          camResult = "Yetki Reddedildi";
-        });
-        break;
-      case PermissionStatus.restricted:
-        setState(() {
-          camResult = "Yetki Kisitlandi";
-        });
-        break;
-      case PermissionStatus.limited:
-        setState(() {
-          camResult = "Yetki Limitlendi";
-        });
-        break;
-      case PermissionStatus.permanentlyDenied:
-        setState(() {
-          camResult = "Yetki Kalici Olarak Reddedildi";
-        });
-        break;
-      case PermissionStatus.provisional:
-        setState(() {
-          camResult = "Provisional";
-        });
-        break;
-    }
-    switch (statusLocation) {
-      case (PermissionStatus.granted):
-        setState(() {
-          locationResult = "Yetki Onaylandi";
-        });
-        break;
-      case (PermissionStatus.denied):
-        setState(() {
-          locationResult = "Yetki Reddedildi";
-        });
-        break;
-      case PermissionStatus.restricted:
-        setState(() {
-          locationResult = "Yetki Kisitlandi";
-        });
-        break;
-      case PermissionStatus.limited:
-        setState(() {
-          locationResult = "Yetki Limitlendi";
-        });
-        break;
-      case PermissionStatus.permanentlyDenied:
-        setState(() {
-          locationResult = "Yetki Kalici Olarak Reddedildi";
-        });
-        break;
-      case PermissionStatus.provisional:
-        setState(() {
-          locationResult = "Provisional";
-        });
-        break;
-    }
-  }
+  MaterialStateProperty<Color?> overlayColor =
+      MaterialStateColor.resolveWith((states) => Colors.grey);
 
   @override
   void initState() {
-    clientCubit = context.read<ClientCubit>();
-    controlPermission();
     super.initState();
+    clientCubit = context.read<ClientCubit>();
+    _loadData();
+    controlPermission();
+  }
+  //bool loader
+  void _loadData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isSwitched = prefs.getBool("isswitched") ?? false;
+      isSwitchedLanguage = prefs.getBool("isswitchedlang") ?? false;
+    });
+  }
+  //bool saver
+  void _saveBool() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool("isswitched", isSwitched);
+    await prefs.setBool("isswitchedlang", isSwitchedLanguage);
+  }
+  //location and camera permission
+  void controlPermission() async {
+    var status = await Permission.camera.status;
+    var statusLocation = await Permission.location.status;
+
+    setState(() {
+      camResult = _getPermissionStatusText(status);
+      locationResult = _getPermissionStatusText(statusLocation);
+    });
+  }
+
+  String _getPermissionStatusText(PermissionStatus status) {
+    switch (status) {
+      case PermissionStatus.granted:
+        return "Yetki Onaylandı";
+      case PermissionStatus.denied:
+        return "Yetki Reddedildi";
+      case PermissionStatus.restricted:
+        return "Yetki Kısıtlandı";
+      case PermissionStatus.limited:
+        return "Yetki Limitlendi";
+      case PermissionStatus.permanentlyDenied:
+        return "Yetki Kalıcı Olarak Reddedildi";
+      case PermissionStatus.provisional:
+        return "Provisional";
+      default:
+        return "Bilinmeyen Durum";
+    }
   }
 
   @override
@@ -128,26 +101,28 @@ class _SettingsPageState extends State<SettingsPage> {
                         Row(
                           children: [
                             Text(
-                                AppLocalizations.of(context)
-                                    .getTranslate("settings_theme"),
-                                style: TextStyle(fontSize: 25)),
+                              AppLocalizations.of(context)
+                                  .getTranslate("settings_theme"),
+                              style: TextStyle(fontSize: 25),
+                            ),
                           ],
                         ),
                         Row(
                           children: [
                             const Text("Light"),
                             Switch(
-                              activeTrackColor:
-                                  Theme.of(context).colorScheme.secondary,
+                              activeTrackColor: Theme.of(context)
+                                  .colorScheme.secondary,
                               activeColor: const Color.fromARGB(255, 218, 221, 211),
                               value: isSwitched,
-                              onChanged: (value) => setState(
-                                () {
+                              onChanged: (value) {
+                                setState(() {
                                   isSwitched = value;
                                   Provider.of<ThemeProvider>(context, listen: false)
                                       .toggleTheme();
-                                },
-                              ),
+                                  _saveBool();
+                                });
+                              },
                             ),
                             const Text("Dark"),
                           ],
@@ -156,15 +131,16 @@ class _SettingsPageState extends State<SettingsPage> {
                         Row(
                           children: [
                             Text(
-                                AppLocalizations.of(context)
-                                    .getTranslate("settings_language"),
-                                style: TextStyle(fontSize: 25)),
+                              AppLocalizations.of(context)
+                                  .getTranslate("settings_language"),
+                              style: TextStyle(fontSize: 25),
+                            ),
                             const Gap(5),
                             Text(clientCubit.state.language),
                           ],
                         ),
                         const Gap(10),
-                        Column(                    
+                        Column(
                           children: [
                             Row(
                               children: [
@@ -173,24 +149,23 @@ class _SettingsPageState extends State<SettingsPage> {
                                   activeTrackColor: Colors.white,
                                   activeColor: Colors.red.shade400,
                                   value: isSwitchedLanguage,
-                                  onChanged: (value) => setState(
-                                    () {
-                                      if (isSwitchedLanguage = value) {
+                                  onChanged: (value) {
+                                    setState(() {
+                                      isSwitchedLanguage = value;
+                                      if (isSwitchedLanguage) {
                                         clientCubit.changeLang(language: "tr");
-                                        isSwitchedLanguage = true;
                                       } else {
                                         clientCubit.changeLang(language: "en");
-                                        isSwitchedLanguage = false;
                                       }
-                                    },
-                                  ),
+                                      _saveBool();
+                                    });
+                                  },
                                 ),
                                 const Text("TR"),
                               ],
                             ),
                           ],
                         ),
-                        const Text(""),
                         const Gap(50),
                         ExpansionTile(
                           title: Text(AppLocalizations.of(context)
@@ -199,11 +174,15 @@ class _SettingsPageState extends State<SettingsPage> {
                             Text(camResult),
                             const Gap(10),
                             ElevatedButton(
-                                style: ButtonStyle(backgroundColor: overlayColor),
-                                onPressed: () async {
-                                  final status = await Permission.camera.request();
-                                },
-                                child: const Text("Ask for Permission")),
+                              style: ButtonStyle(
+                                backgroundColor: overlayColor,
+                              ),
+                              onPressed: () async {
+                                final status = await Permission.camera.request();
+                                controlPermission();
+                              },
+                              child: const Text("Ask for Permission"),
+                            ),
                             const Gap(10),
                           ],
                         ),
@@ -215,11 +194,16 @@ class _SettingsPageState extends State<SettingsPage> {
                             Text(locationResult),
                             const Gap(10),
                             ElevatedButton(
-                                style: ButtonStyle(backgroundColor: overlayColor),
-                                onPressed: () async {
-                                  final status = await Permission.location.request();
-                                },
-                                child: const Text("Ask for Permission")),
+                              style: ButtonStyle(
+                                backgroundColor: overlayColor,
+                              ),
+                              onPressed: () async {
+                                final status =
+                                    await Permission.location.request();
+                                controlPermission();
+                              },
+                              child: const Text("Ask for Permission"),
+                            ),
                             const Gap(10),
                           ],
                         ),
