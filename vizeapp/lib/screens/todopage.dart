@@ -56,7 +56,7 @@ final _controller = TextEditingController();
   //createNewTask
   void createNewTask(){
     showDialog(context: context, builder: (context){
-      return DialogBox(
+      return DialogBox(        
         controller:_controller ,
         onSave: saveNewTask,
         onCancel:() => Navigator.of(context).pop(),
@@ -75,14 +75,14 @@ final _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
         title:const Text("To Do"),
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       floatingActionButton: FloatingActionButton(
-        focusColor: Theme.of(context).colorScheme.background,
+        focusColor: Theme.of(context).colorScheme.primaryContainer,
         onPressed: createNewTask,
         child: Icon(Icons.add, color:Theme.of(context).colorScheme.secondary,),
       ),

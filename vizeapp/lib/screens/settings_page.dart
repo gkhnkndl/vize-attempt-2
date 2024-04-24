@@ -82,7 +82,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Settings"),
+        title:  Text(AppLocalizations.of(context).getTranslate("drawer_settings")),
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.background,
       ),
