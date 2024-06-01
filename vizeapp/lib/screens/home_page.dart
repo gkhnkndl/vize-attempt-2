@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vizeapp/components/bottom_nav_bar.dart';
+import 'package:vizeapp/models/profileItem.dart';
 import 'package:vizeapp/screens/adress_page.dart';
 import 'package:vizeapp/screens/cart_page.dart';
 import 'package:vizeapp/screens/payment_page.dart';
@@ -63,47 +65,63 @@ class _HomePageState extends State<HomePage> {
           children: [
             Column(
               children: [
-                //logo
-                DrawerHeader(child: Image.asset('assets/images/logo.png')),
+                //Profile
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ProfileItem(
+                                user: "Gökhan",
+                                avatar: "assets/images/logo.png",
+                                onTap: () {
+                  GoRouter.of(context).push("/profile");
+                                }),
+                ),
+                const Gap(20),
                 // other pages
                 InkWell(
                   onTap: () => GoRouter.of(context).push("/home"),
-                  child:  Padding(
-                    padding:  EdgeInsets.only(left: 25),
+                  child: Padding(
+                    padding:const EdgeInsets.only(left: 25),
                     child: ListTile(
-                      leading: Icon(Icons.home, color: Theme.of(context).colorScheme.onPrimaryContainer,),
-                      title: Text(AppLocalizations.of(context).getTranslate("drawer_home")),
+                      leading: Icon(
+                        Icons.home,
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      ),
+                      title: Text(AppLocalizations.of(context)
+                          .getTranslate("drawer_home")),
                     ),
                   ),
-                ),
+                ),                
                 InkWell(
                   onTap: () => GoRouter.of(context).push("/address"),
-                  child:  Padding(
-                    padding:  EdgeInsets.only(left: 25),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 25),
                     child: ListTile(
                       leading: Icon(Icons.location_city),
-                      title: Text(AppLocalizations.of(context).getTranslate("drawer_address")),
+                      title: Text(AppLocalizations.of(context)
+                          .getTranslate("drawer_address")),
                     ),
                   ),
                 ),
                 InkWell(
                   onTap: () => GoRouter.of(context).push("/credit"),
-                  child:  Padding(
-                    padding:  EdgeInsets.only(left: 25),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 25),
                     child: ListTile(
                       leading: Icon(Icons.credit_card),
-                      title: Text(AppLocalizations.of(context).getTranslate("drawer_credit")),
+                      title: Text(AppLocalizations.of(context)
+                          .getTranslate("drawer_credit")),
                     ),
                   ),
                 ),
                 InkWell(
                   onTap: () => GoRouter.of(context).push("/todo"),
                   child: Container(
-                    child:  Padding(
-                      padding:  EdgeInsets.only(left: 25),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 25),
                       child: ListTile(
                         leading: Icon(Icons.list),
-                        title: Text(AppLocalizations.of(context).getTranslate("drawer_todo")),
+                        title: Text(AppLocalizations.of(context)
+                            .getTranslate("drawer_todo")),
                       ),
                     ),
                   ),
@@ -111,11 +129,12 @@ class _HomePageState extends State<HomePage> {
                 InkWell(
                   onTap: () => GoRouter.of(context).push("/settings"),
                   child: Container(
-                    child:  Padding(
-                      padding:  EdgeInsets.only(left: 25),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 25),
                       child: ListTile(
                         leading: Icon(Icons.settings),
-                        title: Text(AppLocalizations.of(context).getTranslate("drawer_settings")),
+                        title: Text(AppLocalizations.of(context)
+                            .getTranslate("drawer_settings")),
                       ),
                     ),
                   ),
@@ -123,11 +142,12 @@ class _HomePageState extends State<HomePage> {
 
                 InkWell(
                   onTap: () => GoRouter.of(context).push("/about"),
-                  child:  Padding(
-                    padding:  EdgeInsets.only(left: 25),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 25),
                     child: ListTile(
                       leading: Icon(Icons.info),
-                      title: Text(AppLocalizations.of(context).getTranslate("drawer_about")),
+                      title: Text(AppLocalizations.of(context)
+                          .getTranslate("drawer_about")),
                     ),
                   ),
                 ),

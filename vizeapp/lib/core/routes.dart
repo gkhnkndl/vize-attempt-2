@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 
+import '../screens/account/profileScreen..dart';
 import '../screens/static/about_page.dart';
 import '../screens/adress_page.dart';
 import '../screens/payment_page.dart';
@@ -23,6 +24,10 @@ final routes = GoRouter(
     GoRoute(
       path: '/boarding',
       builder: (context, state) => const BoardingPage(),
+    ),
+    GoRoute(
+      path: '/profile',
+      builder: (context, state) => const ProfileScreen(),
     ),
     GoRoute(
       path: "/home",
