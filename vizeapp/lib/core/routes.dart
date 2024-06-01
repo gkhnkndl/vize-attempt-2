@@ -1,10 +1,10 @@
 import 'package:go_router/go_router.dart';
 
-import '../static/about_page.dart';
+import '../screens/static/about_page.dart';
 import '../screens/adress_page.dart';
 import '../screens/payment_page.dart';
 import '../screens/home_page.dart';
-import '../static/boarding_page.dart';
+import '../screens/static/boarding_page.dart';
 import '../screens/settings_page.dart';
 import '../screens/todopage.dart';
 import '../core/error.dart';

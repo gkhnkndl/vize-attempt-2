@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:preload_page_view/preload_page_view.dart';
 
-import '../components/boarding_item.dart';
+import '../../components/boarding_item.dart';
 
 class BoardingPage extends StatefulWidget {
   const BoardingPage({super.key});
