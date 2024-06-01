@@ -45,5 +45,23 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+	<!-- Permission options for location group-->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>when location<string/>
+	<key>NSLocationAlwaysAndWhenInUsageDescription</key>
+	<string>always location<string/>
+	<key>NSLocationUsageDescription</key>
+	<string>older device<string/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Can i always use location<string/>
+	
+	<!-- Permission options for camera group-->
+	<key>NSCameraUsageDescription</key>
+	<string>camera<string/>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>mic<string/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>photo lib<string/>
 </dict>
 </plist>

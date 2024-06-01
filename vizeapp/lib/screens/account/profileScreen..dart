@@ -1,28 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../models/goBack.dart';
 import '../../models/menuItem.dart';
 import '../../models/profileItem.dart';
 //basit bir profil ekranı daha sonra geliştirilecektir.
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  profilePhotoUpdate() async {
+    try {
+      ImagePicker picker = ImagePicker();
+      var selectedFile = await picker.pickImage(source: ImageSource.gallery);
+    } on Exception catch (e) {
+      print("Error");
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-            ),
+        decoration: const BoxDecoration(),
         child: Column(
           children: [
             const SizedBox(height: 10),
             const ProfileItem(
               avatar: "assets/images/logo.png",
               user: "Gökhan Kundala",
-            ),            
+            ),
             const SizedBox(
               height: 20,
             ),
@@ -59,9 +74,10 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             const Gap(20),
-            OutlinedButton(onPressed: () {
-              
-            }, child: Text("Update Profile Picture")),
+            OutlinedButton(
+              onPressed: profilePhotoUpdate,
+              child: const Text("Update Profile Picture"),
+            ),
             const SizedBox(height: 20),
             const GoBack(),
           ],
