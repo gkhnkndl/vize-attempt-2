@@ -1,6 +1,10 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:vizeapp/components/bottom_nav_bar.dart';
 import 'package:vizeapp/models/profileItem.dart';
 import 'package:vizeapp/screens/adress_page.dart';
@@ -9,7 +13,9 @@ import 'package:vizeapp/screens/payment_page.dart';
 import 'package:vizeapp/screens/gemini_chat.dart';
 import 'package:vizeapp/screens/shop_page.dart';
 import 'package:vizeapp/screens/todopage.dart';
+import 'package:vizeapp/services/api.dart';
 
+import '../core/data.dart';
 import '../core/localization.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,8 +33,53 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _selectedIndex = index;
     });
-  }
+  }  
 
+  String temp = "";
+  syncServer() async {
+    if (kIsWeb) {
+      //web
+    } else {
+
+      API api = API();
+      final response = await api.getStaticPage();
+      AppData cacheYoneticim = AppData();
+
+      //splash cache
+      String splashLogo = response["splash"]["logo"];
+      String splashBg = response["splash"]["background"];
+
+      if(splashLogo.isNotEmpty && splashLogo.startsWith("http"))
+      {
+        final Directory appCacheDir = await getApplicationCacheDirectory();
+
+        await api.download(splashLogo, 
+          "${appCacheDir.path}/splashLogo.${splashLogo.split('.').last.split('?').first}"
+        );
+
+        response["splash"]["logo"] = 
+          "${appCacheDir.path}/splashLogo.${splashLogo.split('.').last.split('?').first}";
+      }
+
+      if(splashBg.isNotEmpty && splashBg.startsWith("http"))
+      {
+        final Directory appCacheDir = await getApplicationCacheDirectory();
+
+        await api.download(splashBg, 
+          "${appCacheDir.path}/splashBg.${splashBg.split('.').last.split('?').first}"
+        );
+
+        response["splash"]["logo"] = 
+          "${appCacheDir.path}/splashBg.${splashBg.split('.').last.split('?').first}";
+      }      
+
+
+      cacheYoneticim.saveMapToCache("splash.json", response["splash"]);
+      cacheYoneticim.saveMapToCache("profile.json", response["profile"]);
+      
+      
+    }
+  }
   //pages to display
 
   final List<Widget> _pages = [
@@ -36,6 +87,13 @@ class _HomePageState extends State<HomePage> {
     const CartPage(),
     const ChatPage(),
   ];
+  @override
+  void initState() {
+    //internet bağlantıs var yok durumu için kullandık
+    syncServer();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,18 +127,18 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ProfileItem(
-                                user: "Gökhan",
-                                avatar: "assets/images/logo.png",
-                                onTap: () {
-                  GoRouter.of(context).push("/profile");
-                                }),
+                      user: "Gökhan",
+                      avatar: "assets/images/logo.png",
+                      onTap: () {
+                        GoRouter.of(context).push("/profile");
+                      }),
                 ),
                 const Gap(20),
                 // other pages
                 InkWell(
                   onTap: () => GoRouter.of(context).push("/home"),
                   child: Padding(
-                    padding:const EdgeInsets.only(left: 25),
+                    padding: const EdgeInsets.only(left: 25),
                     child: ListTile(
                       leading: Icon(
                         Icons.home,
@@ -90,13 +148,13 @@ class _HomePageState extends State<HomePage> {
                           .getTranslate("drawer_home")),
                     ),
                   ),
-                ),                
+                ),
                 InkWell(
                   onTap: () => GoRouter.of(context).push("/address"),
                   child: Padding(
-                    padding:const EdgeInsets.only(left: 25),
+                    padding: const EdgeInsets.only(left: 25),
                     child: ListTile(
-                      leading:const Icon(Icons.location_city),
+                      leading: const Icon(Icons.location_city),
                       title: Text(AppLocalizations.of(context)
                           .getTranslate("drawer_address")),
                     ),
@@ -105,9 +163,9 @@ class _HomePageState extends State<HomePage> {
                 InkWell(
                   onTap: () => GoRouter.of(context).push("/credit"),
                   child: Padding(
-                    padding:const EdgeInsets.only(left: 25),
+                    padding: const EdgeInsets.only(left: 25),
                     child: ListTile(
-                      leading:const Icon(Icons.credit_card),
+                      leading: const Icon(Icons.credit_card),
                       title: Text(AppLocalizations.of(context)
                           .getTranslate("drawer_credit")),
                     ),
@@ -118,7 +176,7 @@ class _HomePageState extends State<HomePage> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 25),
                     child: ListTile(
-                      leading:const Icon(Icons.list),
+                      leading: const Icon(Icons.list),
                       title: Text(AppLocalizations.of(context)
                           .getTranslate("drawer_todo")),
                     ),
@@ -127,9 +185,9 @@ class _HomePageState extends State<HomePage> {
                 InkWell(
                   onTap: () => GoRouter.of(context).push("/settings"),
                   child: Padding(
-                    padding:const EdgeInsets.only(left: 25),
+                    padding: const EdgeInsets.only(left: 25),
                     child: ListTile(
-                      leading:const Icon(Icons.settings),
+                      leading: const Icon(Icons.settings),
                       title: Text(AppLocalizations.of(context)
                           .getTranslate("drawer_settings")),
                     ),
@@ -139,7 +197,7 @@ class _HomePageState extends State<HomePage> {
                 InkWell(
                   onTap: () => GoRouter.of(context).push("/about"),
                   child: Padding(
-                    padding:const EdgeInsets.only(left: 25),
+                    padding: const EdgeInsets.only(left: 25),
                     child: ListTile(
                       leading: const Icon(Icons.info),
                       title: Text(AppLocalizations.of(context)
@@ -153,7 +211,7 @@ class _HomePageState extends State<HomePage> {
             InkWell(
               onTap: () => GoRouter.of(context).push("/logout"),
               child: const Padding(
-                padding:  EdgeInsets.only(left: 25, bottom: 25),
+                padding: EdgeInsets.only(left: 25, bottom: 25),
                 child: ListTile(
                   leading: Icon(Icons.logout),
                   title: Text("Logout"),

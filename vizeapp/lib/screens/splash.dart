@@ -58,6 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         child: Image.network(pageConfig["background"],
                             fit: BoxFit.cover),
                       ),
+                    if (pageConfig["logo"].isNotEmpty)
                     Center(
                         child: Image.asset(
                       pageConfig["logo"],

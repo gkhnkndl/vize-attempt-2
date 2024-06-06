@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image/image.dart' as img;
 import 'package:path_provider/path_provider.dart';
 
+import '../core/cache.dart';
 import '../models/goBack.dart';
 import '../models/menuItem.dart';
 import '../models/profileItem.dart';
@@ -22,6 +23,18 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   File? _file;
   String _photoScale = "";
+  
+  /*
+  loadData() async {
+    //memory read
+    CacheSystem cs = CacheSystem();
+    pageConfig = await cs.getSplashConfig();
+
+    setState(() {
+      this.pageConfig = pageConfig;
+    });    
+  }*/
+  
   profilePhotoUpdate() async {
     try {
       ImagePicker picker = ImagePicker();
