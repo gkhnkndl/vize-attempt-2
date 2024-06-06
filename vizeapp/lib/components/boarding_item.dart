@@ -25,7 +25,7 @@ class BoardingItem extends StatelessWidget {
       //logo
                   Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Image.network(
+        child: Image.asset(
           image, //IMAGEE
           height: 240,
         )),

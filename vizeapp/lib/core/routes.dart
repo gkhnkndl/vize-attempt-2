@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:vizeapp/screens/static/splash.dart';
 
 import '../screens/account/profileScreen..dart';
 import '../screens/static/about_page.dart';
@@ -17,9 +18,13 @@ import '../core/loader.dart';
 final routes = GoRouter(
   errorBuilder: (context, state) => const ErrorScreen(),
   routes: [
-    GoRoute(
+    /*GoRoute(
       path: '/',
       builder: (context, state) => const LoaderScreen(),
+    ),*/
+    GoRoute(
+      path: '/',
+      builder: (context, state) => const SplashScreen(),
     ),
     GoRoute(
       path: '/boarding',
