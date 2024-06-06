@@ -7,9 +7,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image/image.dart' as img;
 import 'package:path_provider/path_provider.dart';
 
-import '../../models/goBack.dart';
-import '../../models/menuItem.dart';
-import '../../models/profileItem.dart';
+import '../models/goBack.dart';
+import '../models/menuItem.dart';
+import '../models/profileItem.dart';
 //basit bir profil ekranı daha sonra geliştirilecektir.
 
 class ProfileScreen extends StatefulWidget {

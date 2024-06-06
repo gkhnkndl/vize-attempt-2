@@ -1,12 +1,12 @@
 import 'package:go_router/go_router.dart';
-import 'package:vizeapp/screens/static/splash.dart';
+import 'package:vizeapp/screens/splash.dart';
 
-import '../screens/account/profileScreen..dart';
-import '../screens/static/about_page.dart';
+import '../screens/profileScreen..dart';
+import '../screens/about_page.dart';
 import '../screens/adress_page.dart';
 import '../screens/payment_page.dart';
 import '../screens/home_page.dart';
-import '../screens/static/boarding_page.dart';
+import '../screens/boarding_page.dart';
 import '../screens/settings_page.dart';
 import '../screens/todopage.dart';
 import '../core/error.dart';

@@ -94,9 +94,9 @@ class _HomePageState extends State<HomePage> {
                 InkWell(
                   onTap: () => GoRouter.of(context).push("/address"),
                   child: Padding(
-                    padding: EdgeInsets.only(left: 25),
+                    padding:const EdgeInsets.only(left: 25),
                     child: ListTile(
-                      leading: Icon(Icons.location_city),
+                      leading:const Icon(Icons.location_city),
                       title: Text(AppLocalizations.of(context)
                           .getTranslate("drawer_address")),
                     ),
@@ -105,9 +105,9 @@ class _HomePageState extends State<HomePage> {
                 InkWell(
                   onTap: () => GoRouter.of(context).push("/credit"),
                   child: Padding(
-                    padding: EdgeInsets.only(left: 25),
+                    padding:const EdgeInsets.only(left: 25),
                     child: ListTile(
-                      leading: Icon(Icons.credit_card),
+                      leading:const Icon(Icons.credit_card),
                       title: Text(AppLocalizations.of(context)
                           .getTranslate("drawer_credit")),
                     ),
@@ -115,27 +115,23 @@ class _HomePageState extends State<HomePage> {
                 ),
                 InkWell(
                   onTap: () => GoRouter.of(context).push("/todo"),
-                  child: Container(
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 25),
-                      child: ListTile(
-                        leading: Icon(Icons.list),
-                        title: Text(AppLocalizations.of(context)
-                            .getTranslate("drawer_todo")),
-                      ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 25),
+                    child: ListTile(
+                      leading:const Icon(Icons.list),
+                      title: Text(AppLocalizations.of(context)
+                          .getTranslate("drawer_todo")),
                     ),
                   ),
                 ),
                 InkWell(
                   onTap: () => GoRouter.of(context).push("/settings"),
-                  child: Container(
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 25),
-                      child: ListTile(
-                        leading: Icon(Icons.settings),
-                        title: Text(AppLocalizations.of(context)
-                            .getTranslate("drawer_settings")),
-                      ),
+                  child: Padding(
+                    padding:const EdgeInsets.only(left: 25),
+                    child: ListTile(
+                      leading:const Icon(Icons.settings),
+                      title: Text(AppLocalizations.of(context)
+                          .getTranslate("drawer_settings")),
                     ),
                   ),
                 ),
@@ -143,9 +139,9 @@ class _HomePageState extends State<HomePage> {
                 InkWell(
                   onTap: () => GoRouter.of(context).push("/about"),
                   child: Padding(
-                    padding: EdgeInsets.only(left: 25),
+                    padding:const EdgeInsets.only(left: 25),
                     child: ListTile(
-                      leading: Icon(Icons.info),
+                      leading: const Icon(Icons.info),
                       title: Text(AppLocalizations.of(context)
                           .getTranslate("drawer_about")),
                     ),
@@ -157,7 +153,7 @@ class _HomePageState extends State<HomePage> {
             InkWell(
               onTap: () => GoRouter.of(context).push("/logout"),
               child: const Padding(
-                padding: const EdgeInsets.only(left: 25, bottom: 25),
+                padding:  EdgeInsets.only(left: 25, bottom: 25),
                 child: ListTile(
                   leading: Icon(Icons.logout),
                   title: Text("Logout"),
