@@ -1,6 +1,6 @@
 # SneakersPlace ayakkabı satış uygulamasına hoşgeldin !
 
-Merhaba, vize projesi olarak verilen koşulları sağlayan bir flutter uygulaması yaptım. Umarım başarılı bir tasarım olmuştur.
+Merhaba, vize projesini geliştirerek final projesi olarak, verilen koşulları sağlayan bir flutter uygulaması yaptım. Umarım başarılı bir tasarım olmuştur.
 
 [Instagramıma göz atmayı unutma](https://www.instagram.com/gokhankundala/)
 
