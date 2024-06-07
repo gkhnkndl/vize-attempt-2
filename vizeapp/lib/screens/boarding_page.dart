@@ -43,35 +43,37 @@ class _BoardingPageState extends State<BoardingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: PreloadPageView.builder(
-            itemCount: boardingData.length,
-            preloadPagesCount: boardingData.length,
-            onPageChanged: (value) {
-              setState(() {
-                page = value;
-              });
-            },
-            itemBuilder: (context, index) => BoardingItem(
-                image: boardingData[index]["image"]!,
-                title: boardingData[index]["title"]!,
-                description: boardingData[index]["description"]!)),
-      ),
-      bottomNavigationBar: SizedBox(
-          
-          height: 70,
-          child: Align(
-            alignment: Alignment.center,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,            
+    return SafeArea(
+      child: Scaffold(
+        body: SafeArea(
+          child: PreloadPageView.builder(
               itemCount: boardingData.length,
-              itemBuilder: (context, index) => Icon(page == index
-                  ? CupertinoIcons.circle_filled
-                  : CupertinoIcons.circle),
-            ),
-          )),
+              preloadPagesCount: boardingData.length,
+              onPageChanged: (value) {
+                setState(() {
+                  page = value;
+                });
+              },
+              itemBuilder: (context, index) => BoardingItem(
+                  image: boardingData[index]["image"]!,
+                  title: boardingData[index]["title"]!,
+                  description: boardingData[index]["description"]!)),
+        ),
+        bottomNavigationBar: SizedBox(
+            
+            height: 70,
+            child: Align(
+              alignment: Alignment.center,
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,            
+                itemCount: boardingData.length,
+                itemBuilder: (context, index) => Icon(page == index
+                    ? CupertinoIcons.circle_filled
+                    : CupertinoIcons.circle),
+              ),
+            )),
+      ),
     );
   }
 }

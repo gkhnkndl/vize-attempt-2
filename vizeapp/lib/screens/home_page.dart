@@ -97,148 +97,150 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: MyBottomNavBar(
-        onTabChange: (index) => navigateBottomBar(index),
-      ),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: Builder(
-            builder: (context) => Padding(
-                  padding: const EdgeInsets.only(left: 22, top: 12),
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.menu,
-                      color: Theme.of(context).colorScheme.secondary, //THEME
-                    ),
-                    onPressed: () {
-                      Scaffold.of(context).openDrawer();
-                    },
-                  ),
-                )),
-      ),
-      drawer: Drawer(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                    onTap: () {
-                      GoRouter.of(context).push("/profile");
-                    },
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          radius: 30,
-                          backgroundImage: _file != null
-                              ? FileImage(_file!)
-                              : AssetImage("assets/images/logo.png")
-                                  as ImageProvider,
-                        ),
-                        const Gap(10),
-                        Text(
-                          "Gökhan",
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onPrimaryContainer),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const Gap(20),
-                // other pages
-                InkWell(
-                  onTap: () => GoRouter.of(context).push("/home"),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 25),
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.home,
-                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+    return SafeArea(
+      child: Scaffold(
+        bottomNavigationBar: MyBottomNavBar(
+          onTabChange: (index) => navigateBottomBar(index),
+        ),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: Builder(
+              builder: (context) => Padding(
+                    padding: const EdgeInsets.only(left: 22, top: 12),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.menu,
+                        color: Theme.of(context).colorScheme.secondary, //THEME
                       ),
-                      title: Text(AppLocalizations.of(context)
-                          .getTranslate("drawer_home")),
+                      onPressed: () {
+                        Scaffold.of(context).openDrawer();
+                      },
+                    ),
+                  )),
+        ),
+        drawer: Drawer(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: InkWell(
+                      onTap: () {
+                        GoRouter.of(context).push("/profile");
+                      },
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 30,
+                            backgroundImage: _file != null
+                                ? FileImage(_file!)
+                                : AssetImage("assets/images/logo.png")
+                                    as ImageProvider,
+                          ),
+                          const Gap(10),
+                          Text(
+                            "Gökhan",
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onPrimaryContainer),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                InkWell(
-                  onTap: () => GoRouter.of(context).push("/address"),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 25),
-                    child: ListTile(
-                      leading: const Icon(Icons.location_city),
-                      title: Text(AppLocalizations.of(context)
-                          .getTranslate("drawer_address")),
+                  const Gap(20),
+                  // other pages
+                  InkWell(
+                    onTap: () => GoRouter.of(context).push("/home"),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 25),
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.home,
+                          color: Theme.of(context).colorScheme.onPrimaryContainer,
+                        ),
+                        title: Text(AppLocalizations.of(context)
+                            .getTranslate("drawer_home")),
+                      ),
                     ),
                   ),
-                ),
-                InkWell(
-                  onTap: () => GoRouter.of(context).push("/credit"),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 25),
-                    child: ListTile(
-                      leading: const Icon(Icons.credit_card),
-                      title: Text(AppLocalizations.of(context)
-                          .getTranslate("drawer_credit")),
+                  InkWell(
+                    onTap: () => GoRouter.of(context).push("/address"),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 25),
+                      child: ListTile(
+                        leading: const Icon(Icons.location_city),
+                        title: Text(AppLocalizations.of(context)
+                            .getTranslate("drawer_address")),
+                      ),
                     ),
                   ),
-                ),
-                InkWell(
-                  onTap: () => GoRouter.of(context).push("/todo"),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 25),
-                    child: ListTile(
-                      leading: const Icon(Icons.list),
-                      title: Text(AppLocalizations.of(context)
-                          .getTranslate("drawer_todo")),
+                  InkWell(
+                    onTap: () => GoRouter.of(context).push("/credit"),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 25),
+                      child: ListTile(
+                        leading: const Icon(Icons.credit_card),
+                        title: Text(AppLocalizations.of(context)
+                            .getTranslate("drawer_credit")),
+                      ),
                     ),
                   ),
-                ),
-                InkWell(
-                  onTap: () => GoRouter.of(context).push("/settings"),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 25),
-                    child: ListTile(
-                      leading: const Icon(Icons.settings),
-                      title: Text(AppLocalizations.of(context)
-                          .getTranslate("drawer_settings")),
+                  InkWell(
+                    onTap: () => GoRouter.of(context).push("/todo"),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 25),
+                      child: ListTile(
+                        leading: const Icon(Icons.list),
+                        title: Text(AppLocalizations.of(context)
+                            .getTranslate("drawer_todo")),
+                      ),
                     ),
                   ),
-                ),
-                InkWell(
-                  onTap: () => GoRouter.of(context).push("/about"),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 25),
-                    child: ListTile(
-                      leading: const Icon(Icons.info),
-                      title: Text(AppLocalizations.of(context)
-                          .getTranslate("drawer_about")),
+                  InkWell(
+                    onTap: () => GoRouter.of(context).push("/settings"),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 25),
+                      child: ListTile(
+                        leading: const Icon(Icons.settings),
+                        title: Text(AppLocalizations.of(context)
+                            .getTranslate("drawer_settings")),
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            InkWell(
-              onTap: () => GoRouter.of(context).push("/logout"),
-              child: const Padding(
-                padding: EdgeInsets.only(left: 25, bottom: 25),
-                child: ListTile(
-                  leading: Icon(Icons.logout),
-                  title: Text("Logout"),
+                  InkWell(
+                    onTap: () => GoRouter.of(context).push("/about"),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 25),
+                      child: ListTile(
+                        leading: const Icon(Icons.info),
+                        title: Text(AppLocalizations.of(context)
+                            .getTranslate("drawer_about")),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              InkWell(
+                onTap: () => GoRouter.of(context).push("/logout"),
+                child: const Padding(
+                  padding: EdgeInsets.only(left: 25, bottom: 25),
+                  child: ListTile(
+                    leading: Icon(Icons.logout),
+                    title: Text("Logout"),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
+        body: _pages[_selectedIndex],
       ),
-      body: _pages[_selectedIndex],
     );
   }
 }

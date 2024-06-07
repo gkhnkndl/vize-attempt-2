@@ -74,28 +74,30 @@ final _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primary,
-      appBar: AppBar(
-        title:const Text("To Do"),
-        centerTitle: true,
+    return SafeArea(
+      child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.primary,
-      ),
-      floatingActionButton: FloatingActionButton(
-        focusColor: Theme.of(context).colorScheme.primaryContainer,
-        onPressed: createNewTask,
-        child: Icon(Icons.add, color:Theme.of(context).colorScheme.secondary,),
-      ),
-      body: ListView.builder(
-        itemCount: db.toDoList.length,
-        itemBuilder: (context, index) {
-          return ToDoTile(
-            taskName: db.toDoList[index][0],
-            taskCompleted: db.toDoList[index][1],
-            onChanged: (value) => checkBoxChanged(value, index),
-            deleteFunction: (context) => deleteTask(index),
-          );
-        },
+        appBar: AppBar(
+          title:const Text("To Do"),
+          centerTitle: true,
+          backgroundColor: Theme.of(context).colorScheme.primary,
+        ),
+        floatingActionButton: FloatingActionButton(
+          focusColor: Theme.of(context).colorScheme.primaryContainer,
+          onPressed: createNewTask,
+          child: Icon(Icons.add, color:Theme.of(context).colorScheme.secondary,),
+        ),
+        body: ListView.builder(
+          itemCount: db.toDoList.length,
+          itemBuilder: (context, index) {
+            return ToDoTile(
+              taskName: db.toDoList[index][0],
+              taskCompleted: db.toDoList[index][1],
+              onChanged: (value) => checkBoxChanged(value, index),
+              deleteFunction: (context) => deleteTask(index),
+            );
+          },
+        ),
       ),
     );
   }

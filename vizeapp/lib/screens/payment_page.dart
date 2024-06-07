@@ -80,187 +80,189 @@ class _ShopPageState extends State<PaymentPage> {
     showDialog(
         context: context,
         builder: (context) {
-          return StatefulBuilder(builder: (context, setState) {
-            return AlertDialog(
-              backgroundColor: Theme.of(context).colorScheme.background,
-              elevation: 0,
-              title: const Text("Add new card"),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextFormField(
-                    keyboardType: TextInputType.name,
-                    cursorColor: Theme.of(context).colorScheme.secondary,
-                    decoration: InputDecoration(
-                        hoverColor: Colors.cyan.shade300,
-                        focusColor: Theme.of(context).colorScheme.background,
-                        labelStyle:const TextStyle(color: Colors.cyan),
-                        focusedBorder:const OutlineInputBorder(
-                            borderSide: BorderSide(
-                          color: Colors.cyan,
-                        )),
-                        labelText: "Card Title",
-                        border: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.cyan.shade300))),
-                    controller: titleCnt,
-                  ),
-                  const Gap(10),
-                  TextFormField(
-                    keyboardType: TextInputType.name,
-                    cursorColor: Theme.of(context).colorScheme.secondary,
-                    decoration: InputDecoration(
-                        hoverColor: Colors.cyan.shade300,
-                        focusColor: Theme.of(context).colorScheme.background,
-                        labelStyle:const TextStyle(color: Colors.cyan),
-                        focusedBorder:const OutlineInputBorder(
-                            borderSide: BorderSide(
-                          color: Colors.cyan,
-                        )),
-                        labelText: "Card Holder",
-                        border: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.cyan.shade300))),
-                    controller: cardHolderCnt,
-                  ),
-                  const Gap(10),
-                  TextFormField(
-                    keyboardType: TextInputType.number,
-                    maxLength: 16,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly,
-                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                    ],
-                    cursorColor: Theme.of(context).colorScheme.secondary,
-                    decoration: InputDecoration(
-                        hoverColor: Colors.cyan.shade300,
-                        focusColor: Theme.of(context).colorScheme.background,
-                        labelStyle:const TextStyle(color: Colors.cyan),
-                        focusedBorder:const OutlineInputBorder(
-                            borderSide: BorderSide(
-                          color: Colors.cyan,
-                        )),
-                        labelText: "Card No",
-                        border: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.cyan.shade300))),
-                    controller: cardNoCnt,
-                  ),
-                  const Gap(10),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          keyboardType: TextInputType.number,
-                          maxLength: 3,
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.digitsOnly,
-                            FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                          ],
-                          cursorColor: Theme.of(context).colorScheme.secondary,
-                          obscureText: true,
-                          decoration: InputDecoration(
-                              hoverColor: Colors.cyan.shade300,
-                              focusColor:
-                                  Theme.of(context).colorScheme.background,
-                              labelStyle:const TextStyle(color: Colors.cyan),
-                              focusedBorder:const OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                color: Colors.cyan,
-                              )),
-                              labelText: "CVV2",
-                              border: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.cyan.shade300))),
-                          controller: cvv2Cnt,
+          return SafeArea(
+            child: StatefulBuilder(builder: (context, setState) {
+              return AlertDialog(
+                backgroundColor: Theme.of(context).colorScheme.background,
+                elevation: 0,
+                title: const Text("Add new card"),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextFormField(
+                      keyboardType: TextInputType.name,
+                      cursorColor: Theme.of(context).colorScheme.secondary,
+                      decoration: InputDecoration(
+                          hoverColor: Colors.cyan.shade300,
+                          focusColor: Theme.of(context).colorScheme.background,
+                          labelStyle:const TextStyle(color: Colors.cyan),
+                          focusedBorder:const OutlineInputBorder(
+                              borderSide: BorderSide(
+                            color: Colors.cyan,
+                          )),
+                          labelText: "Card Title",
+                          border: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.cyan.shade300))),
+                      controller: titleCnt,
+                    ),
+                    const Gap(10),
+                    TextFormField(
+                      keyboardType: TextInputType.name,
+                      cursorColor: Theme.of(context).colorScheme.secondary,
+                      decoration: InputDecoration(
+                          hoverColor: Colors.cyan.shade300,
+                          focusColor: Theme.of(context).colorScheme.background,
+                          labelStyle:const TextStyle(color: Colors.cyan),
+                          focusedBorder:const OutlineInputBorder(
+                              borderSide: BorderSide(
+                            color: Colors.cyan,
+                          )),
+                          labelText: "Card Holder",
+                          border: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.cyan.shade300))),
+                      controller: cardHolderCnt,
+                    ),
+                    const Gap(10),
+                    TextFormField(
+                      keyboardType: TextInputType.number,
+                      maxLength: 16,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly,
+                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                      ],
+                      cursorColor: Theme.of(context).colorScheme.secondary,
+                      decoration: InputDecoration(
+                          hoverColor: Colors.cyan.shade300,
+                          focusColor: Theme.of(context).colorScheme.background,
+                          labelStyle:const TextStyle(color: Colors.cyan),
+                          focusedBorder:const OutlineInputBorder(
+                              borderSide: BorderSide(
+                            color: Colors.cyan,
+                          )),
+                          labelText: "Card No",
+                          border: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.cyan.shade300))),
+                      controller: cardNoCnt,
+                    ),
+                    const Gap(10),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            maxLength: 3,
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.digitsOnly,
+                              FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                            ],
+                            cursorColor: Theme.of(context).colorScheme.secondary,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                                hoverColor: Colors.cyan.shade300,
+                                focusColor:
+                                    Theme.of(context).colorScheme.background,
+                                labelStyle:const TextStyle(color: Colors.cyan),
+                                focusedBorder:const OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                  color: Colors.cyan,
+                                )),
+                                labelText: "CVV2",
+                                border: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.cyan.shade300))),
+                            controller: cvv2Cnt,
+                          ),
                         ),
-                      ),
-                      const Gap(10),
-                      Expanded(
-                        child: TextFormField(
-                          keyboardType: TextInputType.number,
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.digitsOnly,
-                            FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                          ],
-                          cursorColor: Theme.of(context).colorScheme.secondary,
-                          maxLength: 2,
-                          decoration: InputDecoration(
-                              hoverColor: Colors.cyan.shade300,
-                              focusColor:
-                                  Theme.of(context).colorScheme.background,
-                              hintText: "Month",
-                              labelText: "End",
-                              labelStyle: const TextStyle(color: Colors.cyan),
-                              focusedBorder:const OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                color: Colors.cyan,
-                              )),
-                              border: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.cyan.shade300))),
-                          controller: expMonthCnt,
+                        const Gap(10),
+                        Expanded(
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.digitsOnly,
+                              FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                            ],
+                            cursorColor: Theme.of(context).colorScheme.secondary,
+                            maxLength: 2,
+                            decoration: InputDecoration(
+                                hoverColor: Colors.cyan.shade300,
+                                focusColor:
+                                    Theme.of(context).colorScheme.background,
+                                hintText: "Month",
+                                labelText: "End",
+                                labelStyle: const TextStyle(color: Colors.cyan),
+                                focusedBorder:const OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                  color: Colors.cyan,
+                                )),
+                                border: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.cyan.shade300))),
+                            controller: expMonthCnt,
+                          ),
                         ),
-                      ),
-                      const Gap(10),
-                      Expanded(
-                        child: TextFormField(
-                          keyboardType: TextInputType.number,
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.digitsOnly,
-                            FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                          ],
-                          cursorColor: Theme.of(context).colorScheme.secondary,
-                          maxLength: 2,
-                          decoration: InputDecoration(
-                              labelStyle: const TextStyle(color: Colors.cyan),
-                              focusedBorder:const OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                color: Colors.cyan,
-                              )),
-                              hoverColor: Colors.cyan.shade300,
-                              focusColor:
-                                  Theme.of(context).colorScheme.background,
-                              hintText: "Year",
-                              labelText: "End",
-                              border: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.cyan.shade300))),
-                          controller: expYearCnt,
+                        const Gap(10),
+                        Expanded(
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.digitsOnly,
+                              FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                            ],
+                            cursorColor: Theme.of(context).colorScheme.secondary,
+                            maxLength: 2,
+                            decoration: InputDecoration(
+                                labelStyle: const TextStyle(color: Colors.cyan),
+                                focusedBorder:const OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                  color: Colors.cyan,
+                                )),
+                                hoverColor: Colors.cyan.shade300,
+                                focusColor:
+                                    Theme.of(context).colorScheme.background,
+                                hintText: "Year",
+                                labelText: "End",
+                                border: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.cyan.shade300))),
+                            controller: expYearCnt,
+                          ),
                         ),
+                      ],
+                    ),
+                    const Gap(20),
+                    SwitchListTile(
+                      activeTrackColor: Theme.of(context).colorScheme.secondary,
+                      activeColor:const Color.fromARGB(255, 39, 255, 32),
+                      trackColor: overlayColor,
+                      value: remember,
+                      title:
+                          const Text("Keep Card", style: TextStyle(fontSize: 20)),
+                      onChanged: (value) => setState(
+                        () {
+                          remember = value;
+                        },
                       ),
-                    ],
-                  ),
-                  const Gap(20),
-                  SwitchListTile(
-                    activeTrackColor: Theme.of(context).colorScheme.secondary,
-                    activeColor:const Color.fromARGB(255, 39, 255, 32),
-                    trackColor: overlayColor,
-                    value: remember,
-                    title:
-                        const Text("Keep Card", style: TextStyle(fontSize: 20)),
-                    onChanged: (value) => setState(
-                      () {
-                        remember = value;
-                      },
+                    ),
+                  ],
+                ),
+                actions: [
+                  OutlinedButton(
+                    onPressed: saveCard,
+                    child: Text(
+                      "Save",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Theme.of(context).colorScheme.secondary),
                     ),
                   ),
                 ],
-              ),
-              actions: [
-                OutlinedButton(
-                  onPressed: saveCard,
-                  child: Text(
-                    "Save",
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Theme.of(context).colorScheme.secondary),
-                  ),
-                ),
-              ],
-            );
-          });
+              );
+            }),
+          );
         });
   }
 
