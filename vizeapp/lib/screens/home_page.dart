@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vizeapp/components/bottom_nav_bar.dart';
-import 'package:vizeapp/models/profileItem.dart';
 import 'package:vizeapp/screens/adress_page.dart';
 import 'package:vizeapp/screens/cart_page.dart';
 import 'package:vizeapp/screens/payment_page.dart';
@@ -26,21 +26,36 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  //this selected index is to control the bottom nav bar
   int _selectedIndex = 0;
-  // this method will update our selected index when user taps on the bottom bar
+  File? _file;
+
+  @override
+  void initState() {
+    super.initState();
+    syncServer();
+    _loadProfilePhoto();
+  }
+
   void navigateBottomBar(int index) {
     setState(() {
       _selectedIndex = index;
     });
-  }  
+  }
 
-  String temp = "";
-  syncServer() async {
+  Future<void> _loadProfilePhoto() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? filePath = prefs.getString('profile_photo');
+    if (filePath != null && File(filePath).existsSync()) {
+      setState(() {
+        _file = File(filePath);
+      });
+    }
+  }
+
+  Future<void> syncServer() async {
     if (kIsWeb) {
       //web
     } else {
-
       API api = API();
       final response = await api.getStaticPage();
       AppData cacheYoneticim = AppData();
@@ -49,50 +64,36 @@ class _HomePageState extends State<HomePage> {
       String splashLogo = response["splash"]["logo"];
       String splashBg = response["splash"]["background"];
 
-      if(splashLogo.isNotEmpty && splashLogo.startsWith("http"))
-      {
+      if (splashLogo.isNotEmpty && splashLogo.startsWith("http")) {
         final Directory appCacheDir = await getApplicationCacheDirectory();
 
-        await api.download(splashLogo, 
-          "${appCacheDir.path}/splashLogo.${splashLogo.split('.').last.split('?').first}"
-        );
+        await api.download(splashLogo,
+            "${appCacheDir.path}/splashLogo.${splashLogo.split('.').last.split('?').first}");
 
-        response["splash"]["logo"] = 
-          "${appCacheDir.path}/splashLogo.${splashLogo.split('.').last.split('?').first}";
+        response["splash"]["logo"] =
+            "${appCacheDir.path}/splashLogo.${splashLogo.split('.').last.split('?').first}";
       }
 
-      if(splashBg.isNotEmpty && splashBg.startsWith("http"))
-      {
+      if (splashBg.isNotEmpty && splashBg.startsWith("http")) {
         final Directory appCacheDir = await getApplicationCacheDirectory();
 
-        await api.download(splashBg, 
-          "${appCacheDir.path}/splashBg.${splashBg.split('.').last.split('?').first}"
-        );
+        await api.download(splashBg,
+            "${appCacheDir.path}/splashBg.${splashBg.split('.').last.split('?').first}");
 
-        response["splash"]["logo"] = 
-          "${appCacheDir.path}/splashBg.${splashBg.split('.').last.split('?').first}";
-      }      
-
+        response["splash"]["logo"] =
+            "${appCacheDir.path}/splashBg.${splashBg.split('.').last.split('?').first}";
+      }
 
       cacheYoneticim.saveMapToCache("splash.json", response["splash"]);
       cacheYoneticim.saveMapToCache("profile.json", response["profile"]);
-      
-      
     }
   }
-  //pages to display
 
   final List<Widget> _pages = [
     const ShopPage(),
     const CartPage(),
     const ChatPage(),
   ];
-  @override
-  void initState() {
-    //internet bağlantıs var yok durumu için kullandık
-    syncServer();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -123,15 +124,33 @@ class _HomePageState extends State<HomePage> {
           children: [
             Column(
               children: [
-                //Profile
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ProfileItem(
-                      user: "Gökhan",
-                      avatar: "assets/images/logo.png",
-                      onTap: () {
-                        GoRouter.of(context).push("/profile");
-                      }),
+                  child: InkWell(
+                    onTap: () {
+                      GoRouter.of(context).push("/profile");
+                    },
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 30,
+                          backgroundImage: _file != null
+                              ? FileImage(_file!)
+                              : AssetImage("assets/images/logo.png")
+                                  as ImageProvider,
+                        ),
+                        const Gap(10),
+                        Text(
+                          "Gökhan",
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onPrimaryContainer),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 const Gap(20),
                 // other pages
@@ -193,7 +212,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-
                 InkWell(
                   onTap: () => GoRouter.of(context).push("/about"),
                   child: Padding(
@@ -207,7 +225,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            // LOGOUT
             InkWell(
               onTap: () => GoRouter.of(context).push("/logout"),
               child: const Padding(

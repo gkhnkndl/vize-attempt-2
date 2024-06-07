@@ -12,21 +12,20 @@ import '../core/routes.dart';
 import 'theme/theme_provider.dart';
 
 void main() async {
+ 
   //init the hive
   await Hive.initFlutter();
 
   //open a box
-  var box = await Hive.openBox('mybox');
-
+  var box = await Hive.openBox('mybox');  
   runApp(ChangeNotifierProvider(
     create: (context) => ThemeProvider(),
-    child: const MyApp(),
+    child:  MyApp(
+    ),
   ));
 }
 
 class MyApp extends StatelessWidget {
-
-  
   const MyApp({super.key});
 
   @override
@@ -43,29 +42,27 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) => ClientCubit(ClientState(language: "en"))),
         BlocProvider(
-          create: (context) => AddressCubit(AddressState(address: [])),          
+          create: (context) => AddressCubit(AddressState(address: [])),
         ),
-        
-
       ],
       child: ChangeNotifierProvider(
           create: (context) => Cart(), //54:59
-          builder: (context, child) => MaterialApp.router(
+          builder: (context, child) => MaterialApp.router(                            
                 routerConfig: routes,
                 title: "SneakerPlace",
                 debugShowCheckedModeBanner: false,
                 theme: Provider.of<ThemeProvider>(context).themeData,
                 localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('en', 'US'),
-            Locale('tr', 'TR'),
-          ],
-          locale: Locale(context.watch<ClientCubit>().state.language),
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                ],
+                supportedLocales: const [
+                  Locale('en', 'US'),
+                  Locale('tr', 'TR'),
+                ],
+                locale: Locale(context.watch<ClientCubit>().state.language),
               )),
     );
   }

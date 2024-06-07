@@ -6,12 +6,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image/image.dart' as img;
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/cache.dart';
 import '../models/goBack.dart';
 import '../models/menuItem.dart';
 import '../models/profileItem.dart';
-//basit bir profil ekranı daha sonra geliştirilecektir.
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -23,19 +23,29 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   File? _file;
   String _photoScale = "";
-  
-  /*
-  loadData() async {
-    //memory read
-    CacheSystem cs = CacheSystem();
-    pageConfig = await cs.getSplashConfig();
 
-    setState(() {
-      this.pageConfig = pageConfig;
-    });    
-  }*/
-  
-  profilePhotoUpdate() async {
+  @override
+  void initState() {
+    super.initState();
+    _loadProfilePhoto();
+  }
+
+  Future<void> _loadProfilePhoto() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? filePath = prefs.getString('profile_photo');
+    if (filePath != null && File(filePath).existsSync()) {
+      setState(() {
+        _file = File(filePath);
+      });
+    }
+  }
+
+  Future<void> _saveProfilePhoto(String filePath) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('profile_photo', filePath);
+  }
+
+  Future<void> profilePhotoUpdate() async {
     try {
       ImagePicker picker = ImagePicker();
       XFile? selectedFile = await picker.pickImage(
@@ -73,6 +83,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             content: Text("Sectiginiz dosya turu desteklenmiyor."),
           ),
         );
+        return;
       }
 
       img.Image? temp;
@@ -94,7 +105,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         temp = img.decodeWebP(File(selectedFile.path).readAsBytesSync());
       }
 
-      if (temp!.width < 500 || temp!.height < 500 || temp == null) {
+      if (temp == null || temp.width < 500 || temp.height < 500) {
         showDialog(
           context: context,
           builder: (context) => const AlertDialog(
@@ -103,23 +114,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 "Sectiginiz dosya boyutları kucuktur en az 500x500px olmalıdır."),
           ),
         );
-
         return;
       }
 
-      img.Image tumbnail = img.copyResize(temp, width: 500);
-      final resizedFileData = img.encodeJpg(tumbnail, quality: 85);
+      img.Image thumbnail = img.copyResize(temp, width: 500);
+      final resizedFileData = img.encodeJpg(thumbnail, quality: 85);
 
-      final Directory tempDir = await getTemporaryDirectory();
       final Directory appSupportDir = await getApplicationSupportDirectory();
-      final Directory appCacheDir = await getApplicationCacheDirectory();
+      final String profilePhotoPath = '${appSupportDir.path}/profile_photo.jpg';
 
-      
-      File yeniFile = File(selectedFile.path + "_resized.jpg");
-      yeniFile.writeAsBytesSync(resizedFileData);
-      
+      File profilePhotoFile = File(profilePhotoPath);
+      profilePhotoFile.writeAsBytesSync(resizedFileData);
+
+      await _saveProfilePhoto(profilePhotoFile.path);
+
       setState(() {
-        _file = yeniFile;
+        _file = profilePhotoFile;
         _photoScale = "${temp!.width}x${temp.height}";
       });
     } on Exception catch (e) {
@@ -136,9 +146,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Column(
           children: [
             const SizedBox(height: 10),
-            const ProfileItem(
-              avatar: "assets/images/logo.png",
-              user: "Gökhan Kundala",
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    radius: 60,
+                    backgroundImage: _file != null ? FileImage(_file!) : AssetImage("assets/images/logo.png") as ImageProvider,
+                  ),
+                  const Gap(20),
+                  const Text("Gökhan Kundala", style: TextStyle(fontSize: 24),),
+                ],
+              ),
             ),
             const SizedBox(
               height: 20,
@@ -148,7 +168,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Color.fromARGB(255, 77, 0, 201),
+                color: const Color.fromARGB(255, 77, 0, 201),
               ),
               child: Column(
                 children: [
@@ -185,12 +205,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
             if (_file != null)
               Column(
                 children: [
-                  Text("Photo Scale: ${_photoScale}"),
+                  Text("Photo Scale: $_photoScale"),
                   Text("File Size: ${_file!.lengthSync() / 1000} KB"),
                   CircleAvatar(
                     radius: 60,
-                    backgroundImage:
-                        FileImage(_file!), //"${temp.width}x${temp.height}"
+                    backgroundImage: FileImage(_file!),
                   ),
                 ],
               ),

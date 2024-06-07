@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vizeapp/core/cache.dart';
-
 import '../core/colortohex.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -15,8 +15,28 @@ class _SplashScreenState extends State<SplashScreen> {
   Map<String, dynamic> pageConfig = {};
   bool configLoaded = false;
 
-  loadData() async {
-    //memory read
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  Future<void> _checkFirstLaunch() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? isFirstLaunch = prefs.getBool('isFirstLaunch');
+    
+    if (isFirstLaunch == null || isFirstLaunch) {
+      // İlk açılış
+      await prefs.setBool('isFirstLaunch', false);
+      context.go('/boarding');
+    } else {
+      // Sonraki açılışlar
+      context.go('/home');
+    }
+  }
+
+  Future<void> loadData() async {
+    // Memory read
     CacheSystem cs = CacheSystem();
     pageConfig = await cs.getSplashConfig();
 
@@ -25,16 +45,10 @@ class _SplashScreenState extends State<SplashScreen> {
       configLoaded = true;
     });
 
+    // Check first launch after the splash screen duration
     Future.delayed(Duration(seconds: pageConfig["duration"]), () {
-      context.go("/boarding");
+      _checkFirstLaunch();
     });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    loadData();
   }
 
   @override
